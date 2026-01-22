@@ -1,0 +1,12 @@
+{
+  "port": "COM3",
+  "baudrate": 9600,
+  "errors": {
+      "ERR0": "Commande inconnue. Utilisez 'power' ou 'att'.",
+      "ERR1": "Commande mal formée. Vérifiez la syntaxe après l'espace.",
+      "ERR2": "Valeur pour 'power' invalide. Utilisez 'on', 'off', '1' ou '0'.",
+      "ERR3": "Valeur d'atténuation invalide. Utilisez un point (pas une virgule).",
+      "ERR4": "Atténuation hors limites. Doit être entre 0 et 31.5 par multiple de 0.5.",
+      "ERR5": "Impossible de changer l'atténuation. Veuillez allumer l'alimentation."
+  }
+}
