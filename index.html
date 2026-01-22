@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Margot LESTAGE - Technicienne GEII</title>
+    <meta name="description" content="Portfolio de compétences de Margot Lestage, étudiante en BUT GEII à l'IUT de Bordeaux. Projets : Robotique, Systèmes embarqués, RF.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        .hero {
+            max-width: none; 
+            margin: 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* AGRANDISSEMENT DE LA PHOTO */
+        .profile-picture {
+            width: 240px; /* Taille augmentée */
+            height: 240px; /* Taille augmentée */
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- ANIMATION D'APPARITION (FONDU) --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<script>
+// Génération de particules artistiques
+document.addEventListener('DOMContentLoaded', () => {
+    const particlesContainer = document.querySelector('.particles');
+    if (particlesContainer) {
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+            particlesContainer.appendChild(particle);
+        }
+    }
+    
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('header');
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
+    // Scroll reveal animation (FONDU)
+    const ratio = 0.1;
+    const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: ratio
+    };
+
+    const handleIntersect = (entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.intersectionRatio > ratio) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target);
+            }
+        });
+    };
+
+    const observer = new IntersectionObserver(handleIntersect, options);
+    document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
+
+    // Script Modal (Contenu des Hobbies)
+    const modal = document.getElementById('hobbyModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalImagesContainer = document.getElementById('modalImages');
+    const modalDescription = document.getElementById('modalDescription');
+
+    // CONFIGURATION DES TEXTES HOBBIES
+    const hobbyContent = {
+        'Lecture': {
+            title: '📖 Lecture : Anglais et Univers Fictifs',
+            desc: "Ma passion pour la fantasy épique est un moyen d'entretenir et de perfectionner ma pratique de l'anglais, puisque je lis ces œuvres uniquement dans leur langue originale. Titres Lus : <strong>Tress of the Emerald Sea, Yumi and the Nightmare Painter, Mistborn: The Final Empire</strong>.",
+            images: ['mistborn.jpg', 'tress.jpg', 'yuumi.jpg'] 
+        },
+        'Peinture': {
+            title: '🎨 Peinture : Autonomie et Précision',
+            desc: "Je pratique la peinture acrylique sur toile en autodidacte. Ce loisir exige une grande précision du geste et une attention particulière aux détails.",
+            images: ['lune.png', 'fleur.png'] 
+        },
+        'Animes': {
+            title: '🇯🇵 Animés : Diversité Culturelle',
+            desc: "Mon intérêt pour les animés va au-delà du divertissement. C'est une porte d'entrée pour comprendre la culture Japonaise et analyser des récits variés.",
+            images: ['golden_kamui.jpg', 'violet_evergarden.jpg', 'frieren.jpg']
+        },
+        'Astronomie': {
+            title: '🔭 Astronomie : Observation',
+            desc: "J'aime identifier les constellations et étudier les phénomènes physiques du cosmos. Cela développe ma patience et une attention au détail essentielle.",
+            images: ['antennea.jpg', 'orion.jpg']
+        },
+        'Musculation': {
+            title: '💪 Musculation : Défi personnel',
+            desc: "C'est une activité que j'apprécie pratiquer 3 à 4 fois par semaine pour me vider la tête et rester active. Mon grand défi cette année ? Réussir à passer ma toute première traction ! C'est un objectif qui demande de la persévérance, mais j'y travaille à chaque séance.",
+            images: [] // Pas d'image pour la muscu
+        }
+    };
+
+    window.openModal = function(id) {
+        const content = hobbyContent[id];
+        modalTitle.innerHTML = content.title;
+        modalDescription.innerHTML = content.desc;
+        modalImagesContainer.innerHTML = '';
+        
+        content.images.forEach(file => {
+            const img = document.createElement('img');
+            img.src = 'images/' + file; 
+            img.alt = content.title + ' illustration';
+            img.style.maxWidth = '100%'; 
+            img.style.maxHeight = '300px';
+            img.style.borderRadius = '8px';
+            img.style.objectFit = 'cover';
+            img.style.margin = '5px';
+            modalImagesContainer.appendChild(img);
+        });
+
+        modal.classList.add('active');
+    };
+
+    window.closeModal = function() {
+        modal.classList.remove('active');
+    };
+    
+    document.getElementById('hobbyModal').addEventListener('click', function(event) {
+        if (event.target === this) {
+            closeModal();
+        }
+    });
+    
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            closeModal();
+        }
+    });
+});
+</script>
+
+<body>
+    <div class="particles"></div>
+    <div id="imgLightbox" class="lightbox" onclick="closeLightbox()"><span class="close-lightbox">&times;</span><img class="lightbox-content" id="lightboxImg"></div>
+
+    <div class="page-transition-overlay"></div>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="Logo_ML_noir.png" alt="Logo GEII" style="height: 50px;">
+                    <img src="geii-logo.png" alt="Logo GEII" style="height: 50px;">
+                </a>
+            </div>
+            <nav>
+                <a href="index.html" class="active">Accueil (Profil)</a>
+                <div class="dropdown">
+                    <a href="competences.html" class="dropbtn">Mes Compétences <i class="fa-solid fa-caret-down" style="font-size: 0.8em;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="concevoir.html">Concevoir</a>
+                        <a href="implanter.html">Implanter</a>
+                        <a href="verifier.html">Vérifier</a>
+                        <a href="maintenir.html">Maintenir</a>
+                        <a href="manager.html">Manager</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="projets.html" class="dropbtn">Mes Projets Techniques <i class="fa-solid fa-caret-down" style="font-size: 0.8em;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="projets_details_JRC.html">Jeu de rapidité (JRC)</a>
+                        <a href="projets_details_LAB.html">Carte de contrôle RF (Stage)</a>
+                        <a href="projets_details_CDR.html">Radiogoniométrie (CDR)</a>
+                        <a href="projets_details_RMS.html">Robot mini-sumo (RMS)</a>
+                        <a href="projets_details_KAH.html">Kart à hélice (KAH)</a>
+                    </div>
+                </div>
+                <a href="diplomes.html">Diplômes</a>
+                <a href="contact.html">Carrière</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero reveal">
+            <div class="hero-content">
+                <img src="photo.jpg" alt="Photo de profil de Margot Lestage" class="profile-picture">
+                
+                <h1>Margot LESTAGE</h1>
+                <p class="subtitle">
+                    Étudiante en 3ème année de BUT <strong>G</strong>énie <strong>E</strong>lectrique et <strong>I</strong>nformatique <strong>I</strong>ndustrielle <strong>(GEII)</strong> spécialisée en <strong>E</strong>lectronique et <strong>S</strong>ystèmes <strong>E</strong>mbarqués <strong>(ESE)</strong>.
+                </p>
+                
+                <div class="cta-buttons">
+                    <a href="projets.html" class="btn btn-primary">Explorer mes projets <i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="contact.html" class="btn btn-secondary">Carrière</a>
+                </div>
+
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/margot-lestage/" target="_blank" title="Mon Profil LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="mailto:margotannie.lestage@gmail.com" title="Envoyer un e-mail"><i class="fa-solid fa-envelope"></i></a>
+                    <a href="https://github.com/marlestage" target="_blank" title="Mon Profil GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <section id="why-geii-ese" class="reveal">
+            <h2 class="section-title">Pourquoi l'électronique embarquée ?</h2>
+            <p class="section-subtitle">
+                C'est lors de mon stage de 3ème au laboratoire IMS, où travaillait mon frère, que ma vocation est née. Les échanges avec les chercheurs et la découverte de leurs travaux ont confirmé mon envie de faire de l'électronique mon métier. Ce qui me passionne ? La capacité de <strong>concrétiser une idée</strong> : de la conception théorique à la réalisation matérielle et logicielle d'un système fonctionnel.
+            </p>
+            <div class="grid grid-3">
+                <div class="card reveal">
+                    <i class="fa-solid fa-microchip"></i>
+                    <h3>Conception</h3>
+                    <p>Du schéma initial au routage PCB multicouche, je connais et sais suivre le cycle de vie de la carte.</p>
+                </div>
+                <div class="card reveal">
+                    <i class="fa-solid fa-code"></i>
+                    <h3>Programmation</h3>
+                    <p>Développement de <strong>firmwares C/C++</strong> pour microcontrôleurs et scripts Python d'automatisation.</p>
+                </div>
+                <div class="card reveal">
+                    <i class="fa-solid fa-flask"></i>
+                    <h3>Vérification</h3>
+                    <p>Rigoureuse dans les tests et l'élaboration de protocoles de validation fonctionnelle (DDV).</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about-me-section" class="reveal">
+            <h2 class="section-title">Mes passions et ma personnalité</h2>
+            <p class="section-subtitle">
+                Au-delà de la technique, ces activités nourrissent mon équilibre et renforcent des qualités essentielles : la patience, la précision et la persévérance. (Cliquez pour découvrir).
+            </p>
+            
+            <div id="hobbies-container">
+                <div class="grid grid-3">
+                    <div class="card reveal" style="cursor: pointer;" onclick="openModal('Lecture')">
+                        <i class="fa-solid fa-book-open fa-2x"></i>
+                        <h4>Lecture (Cosmere)</h4>
+                        <p>Pratique de l'anglais via la lecture de fantasy épique.</p>
+                    </div>
+                    <div class="card reveal" style="cursor: pointer;" onclick="openModal('Peinture')">
+                        <i class="fa-solid fa-palette fa-2x"></i>
+                        <h4>Peinture</h4>
+                        <p>Pratique autodidacte en acrylique. Développe la précision du geste et l'autonomie.</p>
+                    </div>
+                    <div class="card reveal" style="cursor: pointer;" onclick="openModal('Animes')">
+                        <i class="fa-solid fa-tv fa-2x"></i>
+                        <h4>Animés</h4>
+                        <p>Ouverture sur la culture japonaise et analyse de récits variés.</p>
+                    </div>
+                </div>
+                <div class="grid grid-2" style="max-width: 66%; margin: 2rem auto 0 auto;"> 
+                    <div class="card reveal" style="cursor: pointer;" onclick="openModal('Astronomie')">
+                        <i class="fa-solid fa-satellite-dish fa-2x"></i>
+                        <h4>Astronomie</h4>
+                        <p>Curiosité scientifique et observation minutieuse du ciel.</p>
+                    </div>
+                    <div class="card reveal" style="cursor: pointer;" onclick="openModal('Musculation')">
+                        <i class="fa-solid fa-dumbbell fa-2x"></i>
+                        <h4>Musculation</h4>
+                        <p>Discipline hebdomadaire et dépassement de soi pour atteindre de nouveaux objectifs.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="academic-summary" class="reveal">
+            <h2 class="section-title" style="margin-bottom: 50px;">Rigueur et double diplômes</h2>
+            <div class="grid grid-2">
+                <div class="card reveal">
+                    <h4><i class="fa-solid fa-microchip"></i> Expertise ESE & Cycle en V</h4>
+                    <p>Je sais suivre le <strong>cycle complet du produit</strong> : de la Conception (Schéma, Routage PCB) à la Vérification (Tests, DDV).</p>
+                </div>
+                <div class="card reveal">
+                    <h4><i class="fa-solid fa-heart-pulse"></i> DU Technologie & Santé (TSS)</h4>
+                    <p>Ce cursus apporte une perspective sur les <strong>applications médicales</strong> de l'électronique. Il témoigne de ma polyvalence.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="pre-footer reveal">
+            <div class="pre-footer-content">
+                <div class="pf-col">
+                    <h3><i class="fa-solid fa-address-card"></i> Me contacter</h3>
+                    <div class="social-links-small">
+                        <a href="mailto:margotannie.lestage@gmail.com"><i class="fa-solid fa-envelope"></i> margotannie.lestage@gmail.com</a>
+                        <a href="https://www.linkedin.com/in/margot-lestage/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="https://github.com/marlestage" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+                <div class="pf-col">
+                    <h3><i class="fa-solid fa-compass"></i> Navigation</h3>
+                    <ul class="pf-nav">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="competences.html">Compétences</a></li>
+                        <li><a href="projets.html">Projets</a></li>
+                        <li><a href="diplomes.html">Diplômes</a></li>
+                        <li><a href="contact.html">Carrière</a></li>
+                    </ul>
+                </div>
+                <div class="pf-col">
+                    <h3><i class="fa-solid fa-file-pdf"></i> Mon CV</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-gray); margin-bottom: 1rem;">Téléchargez mon CV complet au format PDF.</p>
+                    <a href="CV_electronicienne.pdf" target="_blank" class="btn btn-primary btn-sm"><i class="fa-solid fa-download"></i> Télécharger CV</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Margot LESTAGE - Réalisé pour mon parcours GEII ESE - IUT Bordeaux.</p>
+    </footer>
+
+    <div id="hobbyModal" class="modal-overlay" onclick="closeModal()">
+        <div class="modal-content card" onclick="event.stopPropagation()">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <h3 id="modalTitle"></h3>
+            <div id="modalImages" class="modal-image-container" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem;">
+                </div>
+            <p id="modalDescription" style="text-align: center; margin-top: 20px;"></p>
+        </div>
+    </div>
+
+    <script>
+        // Lightbox Script
+        const lightbox = document.getElementById('imgLightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        function closeLightbox() { lightbox.style.display = "none"; }
+        document.querySelectorAll('main img:not(.profile-picture)').forEach(img => {
+            img.style.cursor = 'zoom-in';
+            img.addEventListener('click', function() {
+                lightbox.style.display = "flex";
+                lightboxImg.src = this.src;
+            });
+        });
+    </script>
+</body>
+</html>

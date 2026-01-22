@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet Kart à Hélice (KAH) - Margot LESTAGE</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        /* --- STYLES HARMONISÉS --- */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; } .reveal.active { opacity: 1; transform: translateY(0); }
+        .hero-project { width: 100%; background: var(--gradient-hero); padding-top: 8rem; padding-bottom: 4rem; }
+        .hero-content { max-width: 1200px; margin: 0 auto; padding: 0 2rem; text-align: center; }
+        section:not(.hero-project) { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; width: 100%; box-sizing: border-box; }
+        .back-arrow { position: fixed; top: 100px; left: 40px; font-size: 1.5rem; color: var(--primary); background: var(--bg-secondary); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: all 0.3s ease; z-index: 900; border: 1px solid rgba(99, 102, 241, 0.2); } .back-arrow:hover { background: var(--primary); color: white; transform: translateX(-5px); }
+        .card-full { background: var(--bg-secondary); border-radius: 25px; padding: 2.5rem; box-shadow: 0 10px 40px rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.12); margin-bottom: 2rem; }
+        .process-step { margin-bottom: 1rem; display: flex; align-items: flex-start; gap: 1rem; text-align: left; }
+        .process-number { background: var(--primary); color: white; width: 25px; height: 25px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; font-size: 0.85rem; margin-top: 2px; }
+        .project-main-image { max-width: 100%; border-radius: 15px; box-shadow: 0 20px 60px rgba(99, 102, 241, 0.25); margin: 1rem auto; display: block; cursor: zoom-in; transition: transform 0.3s ease; border: 1px solid rgba(0,0,0,0.05); } .project-main-image:hover { transform: scale(1.01); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .section-title { color: var(--primary); font-weight: 800; margin-bottom: 50px; text-transform: none; }
+        .skills-bars { display: flex; flex-direction: column; gap: 1.5rem; } .skill-item { width: 100%; } .skill-info { display: flex; justify-content: space-between; margin-bottom: 5px; font-weight: 600; color: var(--text-dark); } .skill-bar-bg { width: 100%; height: 10px; background: #e2e8f0; border-radius: 5px; overflow: hidden; } .skill-bar-fill { height: 100%; background: var(--primary); width: 0; border-radius: 5px; transition: width 1.5s ease-out; }
+        .reveal.active .skill-bar-fill.fill-concevoir { width: 80%; } .reveal.active .skill-bar-fill.fill-implanter { width: 90%; } .reveal.active .skill-bar-fill.fill-verifier { width: 85%; } .reveal.active .skill-bar-fill.fill-maintenir { width: 50%; } .reveal.active .skill-bar-fill.fill-manager { width: 40%; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .doc-card { background: white; padding: 1.5rem; border-radius: 15px; border: 1px solid #e2e8f0; display: flex; flex-direction: column; align-items: center; text-align: center; transition: 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.05); } .doc-card:hover { border-color: var(--primary); box-shadow: 0 10px 20px rgba(0,0,0,0.1); transform: translateY(-5px); } .doc-icon { font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem; } .doc-actions { display: flex; gap: 0.5rem; margin-top: 1rem; width: 100%; }
+        .btn-doc { flex: 1; padding: 0.6rem; border-radius: 8px; font-size: 0.85rem; text-decoration: none; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 5px; transition: 0.2s; cursor: pointer; } .btn-preview { background: #eff6ff; color: var(--primary); } .btn-preview:hover { background: #dbeafe; } .btn-download { background: var(--primary); color: white; } .btn-download:hover { background: var(--primary-dark); }
+        .tech-stack-container { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 1rem; } .tech-badge { background: white; border: 1px solid #e2e8f0; padding: 0.5rem 1rem; border-radius: 10px; display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--text-dark); transition: all 0.3s; text-decoration: none; font-size: 0.9rem; } .tech-badge:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(99, 102, 241, 0.1); color: var(--primary); } .tech-badge i { color: var(--primary); font-size: 1.2rem; }
+        .lightbox { display: none; position: fixed; z-index: 2000; padding-top: 50px; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.9); backdrop-filter: blur(5px); } .lightbox-content { margin: auto; display: block; max-width: 90%; max-height: 85vh; border-radius: 5px; box-shadow: 0 0 50px rgba(255,255,255,0.1); animation: zoomIn 0.3s; } .close-lightbox { position: absolute; top: 20px; right: 35px; color: #f1f1f1; font-size: 40px; font-weight: bold; transition: 0.3s; cursor: pointer; }
+        @keyframes zoomIn { from {transform:scale(0)} to {transform:scale(1)} }
+        @media (max-width: 1200px) { .back-arrow { display: none; } } @media (max-width: 900px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <a href="projets.html" class="back-arrow" title="Retour aux projets"><i class="fa-solid fa-arrow-left"></i></a>
+    <div id="imgLightbox" class="lightbox" onclick="closeLightbox()"><span class="close-lightbox">&times;</span><img class="lightbox-content" id="lightboxImg"></div>
+    <div class="particles"></div>
+
+    <header>
+        <div class="header-content">
+            <div class="logo"><a href="index.html"><img src="Logo_ML_noir.png" alt="Logo"><img src="geii-logo.png" alt="Logo"></a></div>
+            <nav>
+                <a href="index.html">Accueil (Profil)</a>
+                <div class="dropdown">
+                    <a href="competences.html" class="dropbtn">Mes Compétences <i class="fa-solid fa-caret-down" style="font-size: 0.8em;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="concevoir.html">Concevoir</a>
+                        <a href="implanter.html">Implanter</a>
+                        <a href="verifier.html">Vérifier</a>
+                        <a href="maintenir.html">Maintenir</a>
+                        <a href="manager.html">Manager</a>
+                    </div>
+                </div>
+                <div class="dropdown"><a href="projets.html" class="dropbtn active">Mes Projets Techniques <i class="fa-solid fa-caret-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="projets_details_JRC.html">Jeu de rapidité (JRC)</a><a href="projets_details_LAB.html">Carte de contrôle RF (Stage)</a><a href="projets_details_CDR.html">Radiogoniométrie (CDR)</a><a href="projets_details_RMS.html">Robot mini-sumo (RMS)</a><a href="projets_details_KAH.html" class="active">Kart à hélice (KAH)</a>
+                    </div>
+                </div>
+                <a href="diplomes.html">Diplômes</a><a href="contact.html">Carrière</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-project reveal">
+            <div class="hero-content">
+                <h1 class="section-title">Kart A Hélice radiocommandé (KAH)</h1>
+                <div class="card-full" style="max-width: 900px; margin: 0 auto 3rem auto; text-align: left; background: rgba(255, 255, 255, 0.95);">
+                    <h3 style="margin-bottom: 1.5rem; text-align: center; color: var(--primary);">Pilotage et traitement du signal (Équipe 21)</h3>
+                    
+                    <p style="margin-bottom: 1rem; color: var(--text-gray); font-style: italic; text-align: center;">
+                        <i class="fa-solid fa-users"></i> Projet de groupe - Margot Lestage (Équipière 7 & 8)
+                    </p>
+
+                    <p style="margin-bottom: 1.5rem; line-height: 1.6;">
+                        <strong>Mission :</strong> Conception de la chaîne de traitement numérique pour un kart radiocommandé à hélice. J'ai pris en charge le décodage des signaux infrarouges, le pilotage précis des moteurs et l'implémentation des fonctions de sécurité active.
+                    </p>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div>
+                            <div class="process-step"><div class="process-number">1</div><div><strong>Conception (DDC) :</strong> Analyse du protocole NEC et architecture logicielle.</div></div>
+                            <div class="process-step"><div class="process-number">2</div><div><strong>Réalisation (DDF) :</strong> Programmation C sur ATmega328P et intégration.</div></div>
+                        </div>
+                        <div>
+                            <div class="process-step"><div class="process-number">3</div><div><strong>Vérification (DDV) :</strong> Analyse des signaux à l'oscilloscope.</div></div>
+                            <div class="process-step"><div class="process-number">4</div><div><strong>Validation finale :</strong> Tests fonctionnels sur piste (portée, réactivité).</div></div>
+                        </div>
+                    </div>
+                </div>
+                <img src="KAH/kah_main.jpg" alt="Kart KAH Finalisé" class="project-main-image" style="max-width: 800px;" onclick="openLightbox(this)">
+                <p style="font-size: 0.9rem; color: var(--text-gray); margin-top: 0.5rem;"><i class="fa-solid fa-magnifying-glass-plus"></i> Prototype "KartoFuel" finalisé</p>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2 class="section-title">1. Architecture Système & Analyse</h2>
+            <div class="card-full">
+                <div style="text-align: justify; margin-bottom: 2rem;">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">Synoptique Architecturel</h3>
+                    <p style="line-height: 1.6;">
+                        Avant de coder, j'ai défini l'architecture globale du système pour identifier les flux d'informations. Le système est composé de deux entités distinctes : l'émetteur (télécommande) et le récepteur (kart).
+                        <br><br>
+                        <strong>Analyse des flux :</strong>
+                        <ul style="padding-left: 1.2rem;">
+                            <li><strong>Entrée :</strong> Signal Infrarouge (Protocole NEC) provenant de la télécommande.</li>
+                            <li><strong>Traitement :</strong> Microcontrôleur ATmega328P (Décodage & Sécurité).</li>
+                            <li><strong>Sorties :</strong> PWM pour le moteur (Vitesse), PWM pour le servomoteur (Direction) et signaux logiques pour le retentissement (Buzzer/LEDs).</li>
+                        </ul>
+                    </p>
+                    <h3 style="color: var(--primary); margin-bottom: 1rem; margin-top: 1rem;">Stratégie de Sécurité</h3>
+                    <p style="line-height: 1.6;">
+                        J'ai conçu un système de <strong>Watchdog logiciel</strong> : si aucune trame valide n'est reçue pendant plus de 200ms (perte de connexion), le moteur est coupé instantanément pour éviter tout accident.
+                    </p>
+                </div>
+                <div class="grid grid-2">
+                    <div style="text-align: center;">
+                        <img src="KAH/kah_synoptique_emetteur.jpg" alt="Synoptique Emetteur" class="project-main-image" style="max-width: 100%; border: 1px solid #e2e8f0;" onclick="openLightbox(this)">
+                        <p style="font-size: 0.9rem; color: var(--text-gray); margin-top: 0.5rem;">Synoptique Émetteur</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <img src="KAH/kah_synoptique_recepteur.jpg" alt="Synoptique Récepteur" class="project-main-image" style="max-width: 100%; border: 1px solid #e2e8f0;" onclick="openLightbox(this)">
+                        <p style="font-size: 0.9rem; color: var(--text-gray); margin-top: 0.5rem;">Synoptique Récepteur</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2 class="section-title">2. Réalisation : Programmation & Pilotage</h2>
+            <div class="card-full">
+                <div style="text-align: justify; margin-bottom: 2rem;">
+                    <p style="line-height: 1.6;">
+                        J'ai développé le programme en langage C pour le microcontrôleur <strong>ATmega328P</strong>.
+                        <br><br>
+                        <strong>Génération des signaux PWM :</strong>
+                        <br>Pour piloter les actionneurs, j'ai configuré les timers du microcontrôleur pour générer des signaux PWM précis :
+                        <ul style="padding-left: 1.2rem;">
+                            <li><strong>Moteur (ESC) :</strong> Signal de 50Hz, impulsion variable de 1ms (arrêt) à 2ms (vitesse max).</li>
+                            <li><strong>Servomoteur (Direction) :</strong> Signal centré à 1.5ms pour la position neutre des roues.</li>
+                        </ul>
+                        <br>
+                        <strong>Retentissement :</strong> J'ai également programmé le pilotage du buzzer et des LEDs pour informer l'utilisateur de l'état du kart (réception ordre, marche arrière, etc.).
+                    </p>
+                </div>
+                <div class="grid grid-2">
+                    <div style="text-align: center;">
+                        <img src="KAH/kah_algo_emetteur.jpg" alt="Algorithme Emetteur" class="project-main-image" style="max-width: 100%; border: 1px solid #e2e8f0;" onclick="openLightbox(this)">
+                        <p style="font-size: 0.9rem; color: var(--text-gray); margin-top: 0.5rem;">Algorithme Émetteur</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <img src="KAH/kah_algo_recepteur.jpg" alt="Algorithme Récepteur" class="project-main-image" style="max-width: 100%; border: 1px solid #e2e8f0;" onclick="openLightbox(this)">
+                        <p style="font-size: 0.9rem; color: var(--text-gray); margin-top: 0.5rem;">Algorithme Récepteur</p>
+                    </div>
+                </div>
+                <div style="background: #1e1e1e; color: #d4d4d4; padding: 1.5rem; border-radius: 12px; font-family: monospace; font-size: 0.8rem; overflow-x: auto; margin-top: 2rem;">
+                    <span style="color: #6a9955;">// Extrait Sécurité (Watchdog)</span><br>
+                    if (millis() - last_signal > 200) {<br>
+                    &nbsp;&nbsp;setMotorSpeed(0); <span style="color: #6a9955;">// Arrêt d'urgence</span><br>
+                    &nbsp;&nbsp;digitalWrite(LED_ERR, HIGH);<br>
+                    }
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2 class="section-title">3. Vérification & Validation</h2>
+            <div class="card-full">
+                <div class="grid grid-2">
+                    <div>
+                        <p style="line-height: 1.6;">
+                            <strong>Vérification exhaustive à l'oscilloscope :</strong>
+                            <br>La validation du décodage IR a nécessité une vérification minutieuse. J'ai analysé à l'oscilloscope <strong>chaque trame envoyée</strong> par la télécommande pour m'assurer que le microcontrôleur interprétait correctement les bits de données (Adresse, Commande).
+                            <br>
+                            Cela a représenté un volume de tests important pour garantir la fiabilité de la liaison.
+                            <br><br>
+                            <strong>Tableau de conformité (DDV) :</strong> J'ai consigné l'ensemble des résultats dans un tableau de conformité inclus dans le Dossier de Vérification, validant le respect des timings du protocole NEC à la microseconde près.
+                        </p>
+                    </div>
+                    <div>
+                        <img src="Competences/kah_mesure.jpg" alt="Vérification Oscilloscope" class="project-main-image" style="max-width: 100%; border: 1px solid #e2e8f0;" onclick="openLightbox(this)">
+                        <p style="font-size: 0.9rem; color: var(--text-gray); margin-top: 0.5rem;">Analyse des trames IR à l'oscilloscope</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2 class="section-title">Environnement technique</h2>
+            <div class="card-full" style="text-align: center;">
+                <p style="margin-bottom: 2rem; color: var(--text-gray);">Outils utilisés :</p>
+                <div class="tech-stack-container">
+                    <a href="#" class="tech-badge"><i class="fa-solid fa-microchip"></i> ATmega328P</a>
+                    <a href="#" class="tech-badge"><i class="fa-solid fa-wave-square"></i> Oscilloscope</a>
+                    <a href="#" class="tech-badge"><i class="fa-solid fa-code"></i> Langage C</a>
+                    <a href="#" class="tech-badge"><i class="fa-solid fa-file-word"></i> Pack Office</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2 class="section-title">Mobilisation des compétences</h2>
+            <div class="card-full">
+                <div class="grid grid-2" style="align-items: center;">
+                    <div><p>Projet axé sur l'implantation logicielle bas niveau et la vérification instrumentale.</p></div>
+                    <div class="skills-bars">
+                        <div class="skill-item"><div class="skill-info"><span>Concevoir (Architecture)</span><span>80%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill fill-concevoir"></div></div></div>
+                        <div class="skill-item"><div class="skill-info"><span>Implanter (Codage C)</span><span>90%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill fill-implanter"></div></div></div>
+                        <div class="skill-item"><div class="skill-info"><span>Vérifier (Oscilloscope)</span><span>85%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill fill-verifier"></div></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="project-documents reveal">
+            <h2 class="section-title">Livrables et documentation</h2>
+            <div class="grid grid-4">
+                <div class="doc-card">
+                    <   <p style="font-size: 0.8rem; color: var(--text-gray); margin-bottom: 10px;">Besoins et contraintes.</p>
+                    </div>
+                    <div class="doc-actions">
+                        <a href="KAH/KAH_CDC.pdf" target="_blank" class="btn-doc btn-preview">Aperçu</a>
+                        <a href="KAH/KAH_CDC.pdf" download class="btn-doc btn-download">DL</a>
+                    </div>
+                </div>
+
+                <div class="doc-card">
+                    <div class="doc-content">
+                        <i class="fa-solid fa-pen-ruler doc-icon"></i>
+                        <h4>Dossier d
+                        <a href="KAH/KAH_DDC.pdf" target="_blank" class="btn-doc btn-preview">Aperçu</a>
+                        <a href="KAH/KAH_DDC.pdf" download class="btn-doc btn-download">DL</a>
+                    </div>
+                </div>
+
+                <div class="doc-card">
+                    <div class="doc-content">
+                        <i class="fa-solid fa-microchip doc-icon"></i>
+                        <h4>Dossier de Fabrication (DDF)</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-gray); margin-bottom: 10px;">Plans et méthodes.</p>
+                    </div>
+                    <div class="doc-actions">
+                     >
+
+                <div class="doc-card">
+                    <div class="doc-content">
+                        <i class="fa-solid fa-clipboard-check doc-icon"></i>
+                        <h4>Dossier de Vérification (DDV)</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-gray); margin-bottom: 10px;">Résultats des tests.</p>
+                    </div>
+                    <div class="doc-actions">
+                        <a href="KAH/KAH_DDV.pdf" target="_blank" class="btn-doc btn-preview">Aperçu</a>
+                        <a href="KAH/KAH_DDV.pdf" download class="btn-doc btn-download">DL</a>
+                    </div>
+
+        <section style="text-align: center; padding: 3rem 2rem;">
+            <a href="projets.html" class="btn btn-primary"><i class="fa-solid fa-arrow-left"></i> Retour aux projets</a>
+        </section>
+
+        <section class="pre-footer reveal">
+            <div class="pre-footer-content">
+                <div class="pf-col">
+                    <h3><i class="fa-solid fa-address-card"></i> Me contacter</h3>
+                    <div class="social-links-small">
+                        <a href="mailto:margotannie.lestage@gmail.com"><i class="fa-solid fa-envelope"></i> margotannie.lestage@gmail.com</a>
+                        <a href="https://www.linkedin.com/in/margot-lestage/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="https://github.com/marlestage" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+                <div class="pf-col">
+                    <h3><i class="fa-solid fa-compass"></i> Navigation</h3>
+                    <ul class="pf-nav">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="competences.html">Compétences</a></li>
+                        <li><a href="projets.html">Projets</a></li>
+                        <li><a href="diplomes.html">Diplômes</a></li>
+                        <li><a href="contact.html">Carrière</a></li>
+                    </ul>
+                </div>
+                <div class="pf-col">
+                    <h3><i class="fa-solid fa-file-pdf"></i> Mon CV</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-gray); margin-bottom: 1rem;">Téléchargez mon CV complet au format PDF.</p>
+                    <a href="CV_electronicienne.pdf" target="_blank" class="btn btn-primary btn-sm"><i class="fa-solid fa-download"></i> Télécharger CV</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer><p>© 2025 Margot LESTAGE - Réalisé pour mon parcours GEII ESE - IUT Bordeaux.</p></footer>
+    <script>
+        function openLightbox(img) { document.getElementById("imgLightbox").style.display = "flex"; document.getElementById("lightboxImg").src = img.src; }
+        function closeLightbox() { document.getElementById("imgLightbox").style.display = "none"; }
+        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); }); }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
+    </script>
+</body>
+</html>

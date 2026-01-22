@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Margot LESTAGE - Ma Galerie de Projets Techniques</title>
+    <meta name="description" content="Galerie des projets techniques (Robotique, RF, Systèmes embarqués) réalisés par Margot Lestage au cours de son BUT GEII.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="Logo_ML_noir.png" alt="Logo GEII" style="height: 50px;">
+                    <img src="geii-logo.png" alt="Logo GEII" style="height: 50px;">
+                </a>
+            </div>
+            <nav>
+                <a href="index.html">Accueil (Profil)</a>
+                <div class="dropdown">
+                    <a href="competences.html" class="dropbtn">Mes Compétences <i class="fa-solid fa-caret-down" style="font-size: 0.8em;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="concevoir.html">Concevoir</a>
+                        <a href="implanter.html">Implanter</a>
+                        <a href="verifier.html">Vérifier</a>
+                        <a href="maintenir.html">Maintenir</a>
+                        <a href="manager.html">Manager</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="projets.html" class="dropbtn active">Mes Projets Techniques <i class="fa-solid fa-caret-down" style="font-size: 0.8em;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="projets_details_JRC.html">Jeu de rapidité (JRC)</a>
+                        <a href="projets_details_LAB.html">Carte de contrôle RF (Stage)</a>
+                        <a href="projets_details_CDR.html">Radiogoniométrie (CDR)</a>
+                        <a href="projets_details_RMS.html">Robot mini-sumo (RMS)</a>
+                        <a href="projets_details_KAH.html">Kart à hélice (KAH)</a>
+                    </div>
+                </div>
+                <a href="diplomes.html">Diplômes</a>
+                <a href="contact.html">Carrière</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="projets-gallery">
+            <h2 class="section-title" style="margin-bottom: 50px;">Galerie des Projets & Études de Cas</h2>
+            
+            <p class="section-subtitle">
+                Découvrez une sélection de mes réalisations techniques, présentées par ordre antéchronologique. Ces projets illustrent ma progression et ma capacité à mobiliser des compétences variées pour répondre à des problématiques concrètes.
+            </p>
+            
+            <div class="grid grid-2">
+                
+                <a href="projets_details_JRC.html" class="card reveal" style="text-decoration: none;">
+                    <div class="card-image" style="background-image: url('JRC/jrc_main.jpg');"></div>
+                    <div class="card-content">
+                        <h3>SAE : Jeu de rapidité collaboratif (JRC)</h3>
+                        <div class="tags">
+                            <span class="tag">S5 | Firmware Complet</span>
+                            <span class="tag">USB & Temps Réel (1ms)</span>
+                        </div>
+                        <p><strong>Rôle :</strong> Développement de l'ensemble du firmware C/C++ pour les algorithmes de jeu ('A' et 'B') et la gestion du chronométrage 1ms. Conception du PCB (80x80mm) et de la liaison USB SPP.</p>
+                    </div>
+                    <div class="card-footer">
+                        <p style="margin-top: 1rem; color: var(--primary);">Voir l'étude de cas →</p>
+                    </div>
+                </a>
+
+                <a href="projets_details_LAB.html" class="card reveal" style="text-decoration: none;">
+                    <div class="card-image" style="background-image: url('LAB/lab_main.jpg');"></div>
+                    <div class="card-content">
+                        <h3>Stage : Carte de Contrôle Atténuateur RF</h3>
+                        <div class="tags">
+                            <span class="tag">Stage S5 | 12 Semaines</span>
+                            <span class="tag">RF & Routage PCB Pro</span>
+                        </div>
+                        <p><strong>Rôle :</strong> Conception électronique complète (schéma, routage) d'un module de pilotage d'atténuateur RF (ADRF5720) pour la caractérisation d'ADC haute fréquence (ALMA 2030).</p>
+                    </div>
+                    <div class="card-footer">
+                        <p style="margin-top: 1rem; color: var(--primary);">Voir l'étude de cas →</p>
+                    </div>
+                </a>
+                
+                <a href="projets_details_CDR.html" class="card reveal" style="text-decoration: none;">
+                    <div class="card-image" style="background-image: url('CDR/cdr_main.jpg');"></div>
+                    <div class="card-content">
+                        <h3>SAE : Challenge de Radiogoniométrie (CDR)</h3>
+                        <div class="tags">
+                            <span class="tag">S4 | Rôle Transversal</span>
+                            <span class="tag">Théorie RF & Mesures</span>
+                        </div>
+                        <p><strong>Rôle :</strong> Analyse théorique et conception d'une antenne directive HB9CV (144 MHz). Validation des exigences complexes (Impédance, Gain, Directivité).</p>
+                    </div>
+                    <div class="card-footer">
+                        <p style="margin-top: 1rem; color: var(--primary);">Voir l'étude de cas →</p>
+                    </div>
+                </a>
+
+                <a href="projets_details_RMS.html" class="card reveal" style="text-decoration: none;">
+                    <div class="card-image" style="background-image: url('RMS/rms_main.jpg');"></div>
+                    <div class="card-content">
+                        <h3>SAE : Robot Mini-Sumo (RMS)</h3>
+                        <div class="tags">
+                            <span class="tag">S3 | Pôle Acquisition</span>
+                            <span class="tag">Conversion A/N & Sécurité LiPo</span>
+                        </div>
+                        <p><strong>Rôle :</strong> Responsable de la chaîne d'acquisition (8 capteurs). Conception du shield Arduino et résolution du problème de manque d'entrées analogiques via des comparateurs (MCP6004).</p>
+                    </div>
+                    <div class="card-footer">
+                        <p style="margin-top: 1rem; color: var(--primary);">Voir l'étude de cas →</p>
+                    </div>
+                </a>
+                
+                <a href="projets_details_KAH.html" class="card reveal" style="text-decoration: none;">
+                    <div class="card-image" style="background-image: url('KAH/kah_main.jpg');"></div>
+                    <div class="card-content">
+                        <h3>SAE : Kart à hélice télécommandé (KAH)</h3>
+                        <div class="tags">
+                            <span class="tag">S2 | Pôle Traitement</span>
+                            <span class="tag">Protocole NEC & Moteur PWM</span>
+                        </div>
+                        <p><strong>Rôle :</strong> Développement de la logique de Traitement (émetteur/récepteur). Codage du protocole NEC, gestion du PWM (moteur brushless/servomoteur) et implémentation de la sécurité IR.</p>
+                    </div>
+                    <div class="card-footer">
+                        <p style="margin-top: 1rem; color: var(--primary);">Voir l'étude de cas →</p>
+                    </div>
+                </a>
+                
+            </div>
+        </section>
+
+        <section class="pre-footer reveal">
+            <div class="pre-footer-content">
+                <div class="pf-col">
+                    <h3><i class="fa-solid fa-address-card"></i> Me contacter</h3>
+                    <div class="social-links-small">
+                        <a href="mailto:margotannie.lestage@gmail.com"><i class="fa-solid fa-envelope"></i> margotannie.lestage@gmail.com</a>
+                        <a href="https://www.linkedin.com/in/margot-lestage/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="https://github.com/marlestage" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+                <div class="pf-col">
+                    <h3><i class="fa-solid fa-compass"></i> Navigation</h3>
+                    <ul class="pf-nav">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="competences.html">Compétences</a></li>
+                        <li><a href="projets.html">Projets</a></li>
+                        <li><a href="diplomes.html">Diplômes</a></li>
+                        <li><a href="contact.html">Carrière</a></li>
+                    </ul>
+                </div>
+                <div class="pf-col">
+                    <h3><i class="fa-solid fa-file-pdf"></i> Mon CV</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-gray); margin-bottom: 1rem;">Téléchargez mon CV complet au format PDF.</p>
+                    <a href="CV_electronicienne.pdf" target="_blank" class="btn btn-primary btn-sm"><i class="fa-solid fa-download"></i> Télécharger CV</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Margot LESTAGE - Réalisé pour mon parcours GEII ESE - IUT Bordeaux.</p>
+    </footer>
+
+    <script>
+        // Script pour la transition fluide entre les pages (Effet Volet)
+        document.addEventListener('DOMContentLoaded', () => {
+            const overlay = document.querySelector('.page-transition-overlay');
+            // Fait remonter le volet pour révéler la page
+            overlay.style.transform = 'translateY(-100%)';
+
+            const internalLinks = document.querySelectorAll('a');
+
+            internalLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    const isExternal = this.getAttribute('target') === '_blank';
+                    const isAnchor = href.startsWith('#');
+
+                    // Exclure les liens externes, les ancres et les fichiers (PDF, etc.)
+                    if (isExternal || isAnchor || (href.includes('.') && !href.endsWith('.html'))) {
+                        return;
+                    }
+
+                    e.preventDefault();
+                    document.body.classList.add('is-transitioning');
+
+                    setTimeout(() => {
+                        window.location.href = href;
+                    }, 500); // Doit correspondre à la durée de la transition CSS
+                });
+            });
+        });
+
+        // Script pour l'animation au défilement (Fondu)
+        const ratio = 0.1;
+        const options = {
+            root: null,
+            rootMargin: '0px',
+            threshold: ratio
+        };
+
+        const handleIntersect = function (entries, observer) {
+            entries.forEach(function (entry) {
+                if (entry.intersectionRatio > ratio) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(handleIntersect, options);
+        document.querySelectorAll('.reveal').forEach(function (r) {
+            observer.observe(r);
+        });
+    </script>
+</body>
+</html>

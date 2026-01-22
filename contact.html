@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrière & Contact - Margot LESTAGE</title>
+    <meta name="description" content="Contactez Margot Lestage pour des opportunités de carrière en électronique et systèmes embarqués. Trajectoire professionnelle et CV.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        
+        /* --- TIMELINE LARGE --- */
+        /* Augmentation de la largeur globale pour que ça prenne plus de place */
+        .timeline { position: relative; max-width: 1000px; margin: 0 auto 4rem auto; padding: 20px 0; }
+        
+        .timeline::after { 
+            content: ''; 
+            position: absolute; 
+            width: 4px; 
+            background-color: var(--primary); 
+            top: 0; 
+            bottom: 0; 
+            left: 50%; 
+            margin-left: -2px; 
+            border-radius: 2px; 
+        }
+        
+        /* Modification du padding pour rapprocher le contenu du centre tout en l'élargissant */
+        .timeline-item { padding: 10px 50px; position: relative; background-color: inherit; width: 50%; box-sizing: border-box; }
+        .timeline-item.left { left: 0; text-align: right; }
+        .timeline-item.right { left: 50%; text-align: left; }
+        
+        /* Cercles centrés */
+        .timeline-item::after { 
+            content: ''; 
+            position: absolute; 
+            width: 20px; 
+            height: 20px; 
+            background-color: white; 
+            border: 4px solid var(--primary); 
+            top: 24px; /* Ajusté pour s'aligner avec le haut de la boite */
+            border-radius: 50%; 
+            z-index: 1;
+            box-shadow: 0 0 0 4px rgba(255,255,255,1); 
+        }
+        
+        .timeline-item.left::after { right: -14px; }
+        .timeline-item.right::after { left: -14px; }
+        
+        /* Boîtes plus larges et moins hautes (padding ajusté) */
+        .timeline-content { 
+            padding: 25px 35px; /* Plus d'espace interne */
+            background-color: white; 
+            position: relative; 
+            border-radius: 20px; /* Coins plus arrondis */
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08); 
+            border: 1px solid rgba(99, 102, 241, 0.1); 
+            transition: 0.3s; 
+        }
+        .timeline-content p { text-align: justify; }
+        .timeline-content:hover { transform: scale(1.01); box-shadow: 0 15px 30px rgba(0,0,0,0.12); }
+        
+        .status-badge { display: inline-block; padding: 6px 15px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; text-transform: uppercase; margin-bottom: 12px; }
+        .badge-current { background-color: #dcfce7; color: #166534; border: 1px solid #166534; }
+        .badge-future { background-color: #e0e7ff; color: var(--primary); border: 1px solid var(--primary); }
+        .badge-goal { background-color: #fef9c3; color: #854d0e; border: 1px solid #854d0e; }
+
+        /* Responsive : retour à une colonne sur mobile */
+        @media screen and (max-width: 900px) {
+            .timeline::after { left: 31px; }
+            .timeline-item { width: 100%; padding-left: 80px; padding-right: 25px; }
+            .timeline-item.left, .timeline-item.right { left: 0; text-align: left; }
+            .timeline-item.left::after, .timeline-item.right::after { left: 17px; }
+        }
+
+        /* --- NOUVEAU : LIGNES HORIZONTALES --- */
+        .timeline-row { display: flex; width: 100%; }
+        .timeline-row .timeline-item.right { left: auto; } /* Annule le décalage de 50% car géré par flexbox */
+        @media screen and (max-width: 900px) {
+            .timeline-row { flex-direction: column; }
+            .timeline-row .timeline-item.right { left: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles"></div>
+    <div class="page-transition-overlay"></div>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="Logo_ML_noir.png" alt="Logo GEII" style="height: 50px;">
+                    <img src="geii-logo.png" alt="Logo GEII" style="height: 50px;">
+                </a>
+            </div>
+            <nav>
+                <a href="index.html">Accueil (Profil)</a>
+                <div class="dropdown">
+                    <a href="competences.html" class="dropbtn">Mes Compétences <i class="fa-solid fa-caret-down" style="font-size: 0.8em;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="concevoir.html">Concevoir</a>
+                        <a href="implanter.html">Implanter</a>
+                        <a href="verifier.html">Vérifier</a>
+                        <a href="maintenir.html">Maintenir</a>
+                        <a href="manager.html">Manager</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="projets.html" class="dropbtn">Mes Projets Techniques <i class="fa-solid fa-caret-down" style="font-size: 0.8em;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="projets_details_JRC.html">Jeu de rapidité (JRC)</a>
+                        <a href="projets_details_LAB.html">Carte de contrôle RF (Stage)</a>
+                        <a href="projets_details_CDR.html">Radiogoniométrie (CDR)</a>
+                        <a href="projets_details_RMS.html">Robot mini-sumo (RMS)</a>
+                        <a href="projets_details_KAH.html">Kart à hélice (KAH)</a>
+                    </div>
+                </div>
+                <a href="diplomes.html">Diplômes</a>
+                <a href="contact.html" class="active">Carrière</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="contact-main" class="reveal">
+            <h2 class="section-title" style="margin-bottom: 20px;">Trajectoire Professionnelle</h2>
+            
+            <p class="section-subtitle">
+                Mon projet professionnel vise à acquérir une expertise solide en électronique et systèmes embarqués. Cette trajectoire, incluant stage et alternance, dessine les étapes clés de mon évolution vers l'ingénierie R&D (la suite du parcours est présentée à titre prévisionnel).
+            </p>
+            
+            <div class="timeline">
+                
+                <div class="timeline-item left reveal">
+                    <div class="timeline-content">
+                        <span class="status-badge badge-current">Fév. 2026 - STAGE</span>
+                        <h3><i class="fa-solid fa-microchip"></i> Stage 3ème année - EXAIL</h3>
+                        <p style="font-size: 0.95rem; color: var(--text-gray); margin-bottom: 0.5rem;"><strong>Ingénieur Intégration & Validation Électronique</strong></p>
+                        <p style="font-size: 0.95rem; line-height: 1.6;">
+                            Intégration au sein de la division <strong>Systèmes Quantiques</strong>.
+                            <br>• Assemblage et test de cartes électroniques pour systèmes laser.
+                            <br>• Validation de bancs de tests opto-électroniques complexes.
+                            <br>• Travail en salle blanche et environnement de production haute technologie.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- LIGNE 2 : ENSEIRB & ALTERNANCE -->
+                <div class="timeline-row">
+                    <div class="timeline-item left reveal">
+                        <div class="timeline-content">
+                            <span class="status-badge badge-future">Sept. 2026 - Alternance</span>
+                            <h3><i class="fa-solid fa-satellite"></i> Alternance - LAB</h3>
+                            <p style="font-size: 0.95rem; color: var(--text-gray); margin-bottom: 0.5rem;"><strong>Développement FPGA & Systèmes Spatiaux</strong></p>
+                            <p style="font-size: 0.95rem; line-height: 1.6;">
+                                Poursuite de ma collaboration avec le <strong>Laboratoire d'Astrophysique de Bordeaux</strong>.
+                                <br>• Conception d'architectures numériques sur cibles <strong>FPGA</strong>.
+                                <br>• Contribution aux instruments de nouvelle génération pour l'observation spatiale.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item right reveal">
+                        <div class="timeline-content">
+                            <span class="status-badge badge-future">2026 - 2029</span>
+                            <h3><i class="fa-solid fa-graduation-cap"></i> ENSEIRB-MATMECA</h3>
+                            <p style="font-size: 0.95rem; color: var(--text-gray); margin-bottom: 0.5rem;"><strong>Filière S2E (Systèmes Électroniques Embarqués)</strong></p>
+                            <p style="font-size: 0.95rem; line-height: 1.6;">
+                                Objectif : Acquérir une expertise théorique solide en architectures numériques avancées et traitement du signal pour compléter mon expérience terrain.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LIGNE 3 : INGÉNIEUR & PHD -->
+                <div class="timeline-row">
+                    <div class="timeline-item left reveal">
+                        <div class="timeline-content">
+                            <span class="status-badge badge-goal">Perspective 2029+</span>
+                            <h3><i class="fa-solid fa-microchip"></i> Ingénieur Conception FPGA</h3>
+                            <p style="font-size: 0.95rem; color: var(--text-gray); margin-bottom: 0.5rem;"><strong>Objectif Professionnel</strong></p>
+                            <p style="font-size: 0.95rem; line-height: 1.6;">
+                                Intégrer une équipe de R&D pour concevoir des architectures numériques complexes sur cibles FPGA/SoC dans des secteurs de pointe (Spatial, Défense, Télécoms).
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item right reveal">
+                        <div class="timeline-content">
+                            <span class="status-badge badge-goal">Perspective 2029+</span>
+                            <h3><i class="fa-solid fa-flask"></i> Doctorat (PhD) ?</h3>
+                            <p style="font-size: 0.95rem; color: var(--text-gray); margin-bottom: 0.5rem;"><strong>Poursuite Académique</strong></p>
+                            <p style="font-size: 0.95rem; line-height: 1.6;">
+                                Une poursuite en thèse après le diplôme d'ingénieur est une option que je considère pour approfondir une expertise scientifique pointue et contribuer à l'innovation technologique.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+            
+        <section class="pre-footer reveal">
+            <div class="pre-footer-content">
+                <div class="pf-col">
+                    <h3><i class="fa-solid fa-address-card"></i> Me contacter</h3>
+                    <div class="social-links-small">
+                        <a href="mailto:margotannie.lestage@gmail.com"><i class="fa-solid fa-envelope"></i> margotannie.lestage@gmail.com</a>
+                        <a href="https://www.linkedin.com/in/margot-lestage/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="https://github.com/marlestage" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+                <div class="pf-col">
+                    <h3><i class="fa-solid fa-compass"></i> Navigation</h3>
+                    <ul class="pf-nav">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="competences.html">Compétences</a></li>
+                        <li><a href="projets.html">Projets</a></li>
+                        <li><a href="diplomes.html">Diplômes</a></li>
+                        <li><a href="contact.html">Carrière</a></li>
+                    </ul>
+                </div>
+                <div class="pf-col">
+                    <h3><i class="fa-solid fa-file-pdf"></i> Mon CV</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-gray); margin-bottom: 1rem;">Téléchargez mon CV complet au format PDF.</p>
+                    <a href="CV_electronicienne.pdf" target="_blank" class="btn btn-primary btn-sm"><i class="fa-solid fa-download"></i> Télécharger CV</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Margot LESTAGE - Réalisé pour mon parcours GEII ESE - IUT Bordeaux.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const overlay = document.querySelector('.page-transition-overlay');
+            if(overlay) overlay.style.transform = 'translateY(-100%)';
+            
+            const internalLinks = document.querySelectorAll('a');
+            internalLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    const isExternal = this.getAttribute('target') === '_blank';
+                    const isAnchor = href.startsWith('#');
+                    if (isExternal || isAnchor || (href.includes('.') && !href.endsWith('.html'))) return;
+                    e.preventDefault();
+                    document.body.classList.add('is-transitioning');
+                    setTimeout(() => { window.location.href = href; }, 500);
+                });
+            });
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
+    </script>
+</body>
+</html>
