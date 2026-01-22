@@ -1,0 +1,258 @@
+/* ============================================= */
+/*      STYLES SPÉCIFIQUES AUX PAGES         */
+/* ============================================= */
+
+/* ============================================= */
+/*           PAGE COMPÉTENCES                  */
+/* ============================================= */
+
+.tabs-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.tabs-nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.tab-button {
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 2px solid transparent;
+    background: white;
+    color: var(--text-gray);
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(99, 102, 241, 0.1);
+}
+
+.tab-button:hover {
+    color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.tab-button.active {
+    background: var(--gradient-1);
+    color: white;
+    border-color: var(--primary-dark);
+    box-shadow: 0 8px 30px rgba(99, 102, 241, 0.3);
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.skill-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.skill-grid .card h4 {
+    font-size: 1.2rem;
+}
+
+/* ============================================= */
+/*         PAGE DIPLÔMES & NOTES               */
+/* ============================================= */
+
+.metric-card {
+    text-align: center;
+    padding: 1.5rem;
+}
+
+.metric-card h4 {
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.metric-card i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: block;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.metric-card h4 {
+    margin-bottom: 0.5rem;    
+}
+
+.metric-card p {
+    font-size: 0.9rem;
+    color: var(--text-gray);
+}
+
+.chart-container {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;    
+    align-items: flex-end;
+    padding: 2rem 1rem 1rem 1rem;
+    border-top: 1px solid #e0e0e0;
+    margin-top: 2rem;
+}
+
+.chart-bar-wrapper {
+    position: relative;
+    width: 15%;
+    height: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    text-decoration: none;
+}
+
+.chart-bar {
+    width: 100%;
+    background: var(--gradient-1);
+    border-radius: 10px 10px 0 0;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;    
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    box-shadow: 0 5px 20px rgba(99, 102, 241, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.chart-bar:hover {
+    transform: scaleY(1.05);
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+}
+
+.bar-label {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: bold;
+    color: var(--primary-dark);
+    color: var(--text-dark);
+    font-size: 1em;
+    opacity: 1;
+    transition: opacity 0.3s;    
+}
+
+.bar-rank-tooltip {
+    position: absolute;
+    top: -55px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary-dark);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.85em;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.chart-bar-wrapper:hover .bar-rank-tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
+.semester-label {
+    padding-bottom: 0.8rem;
+    font-weight: 600;
+    color: white;
+    font-size: 0.9em;
+}
+
+.horizontal-timeline {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+    padding: 4rem 0 2rem 0;
+    margin-top: 2rem;
+    overflow: visible; /* Permet aux infobulles de dépasser de la carte */
+}
+
+.timeline-event {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    width: 20%;
+}
+
+.timeline-event-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: white;
+    border: 4px solid var(--primary);
+    background: var(--bg-secondary);
+    border: 3px solid var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem auto;
+    font-size: 1.5rem;
+    color: var(--primary);
+}
+
+.timeline-event-date {
+    font-weight: bold;
+    color: var(--primary-dark);
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.timeline-event-title {
+    font-size: 0.9rem;
+    color: var(--text-gray);
+    font-weight: 600;
+}
+
+.timeline-event .tooltip {
+    visibility: hidden;
+    width: 200px;
+    background-color: var(--primary-dark);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 0.4rem 0.9rem;
+    position: absolute;
+    z-index: 1;
+    bottom: 115%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 0.85em;
+    font-weight: 600;
+    white-space: normal;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.timeline-event:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet Robot Mini-Sumo (RMS) - Margot LESTAGE</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        /* --- STYLES HARMONISÉS (IDENTIQUES AU LAB/JRC/KAH) --- */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; } .reveal.active { opacity: 1; transform: translateY(0); }
+        .hero-project { width: 100%; background: var(--gradient-hero); padding-top: 8rem; padding-bottom: 4rem; }
+        .hero-content { max-width: 1200px; margin: 0 auto; padding: 0 2rem; text-align: center; }
+        section:not(.hero-project) { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; width: 100%; box-sizing: border-box; }
+        .back-arrow { position: fixed; top: 100px; left: 40px; font-size: 1.5rem; color: var(--primary); background: var(--bg-secondary); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: all 0.3s ease; z-index: 900; border: 1px solid rgba(99, 102, 241, 0.2); } .back-arrow:hover { background: var(--primary); color: white; transform: translateX(-5px); }
+        .card-full { background: var(--bg-secondary); border-radius: 25px; padding: 2.5rem; box-shadow: 0 10px 40px rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.12); margin-bottom: 2rem; }
+        .process-step { margin-bottom: 1rem; display: flex; align-items: flex-start; gap: 1rem; text-align: left; }
+        .process-number { background: var(--primary); color: white; width: 25px; height: 25px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; font-size: 0.85rem; margin-top: 2px; }
+        .project-main-image { max-width: 100%; border-radius: 15px; box-shadow: 0 20px 60px rgba(99, 102, 241, 0.25); margin: 1rem auto; display: block; cursor: zoom-in; transition: transform 0.3s ease; border: 1px solid rgba(0,0,0,0.05); } .project-main-image:hover { transform: scale(1.01); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .section-title { color: var(--primary); font-weight: 800;  1.5rem; } .skill-item { width: 100%; } .skill-info { display: flex; justify-content: space-between; margin-bottom: 5px; font-weight: 600; color: var(--text-dark); } .skill-bar-bg { width: 100%; height: 10px; background: #e2e8f0; border-radius: 5px; overflow: hidden; } .skill-bar-fill { height: 100%; background: var(--primary); width: 0; border-radius: 5px; transition: width 1.5s ease-out; }
+        .reveal.active .skill-bar-fill.fill-concevoir { width: 85%; } .reveal.active .skill-bar-fill.fill-implanter { width: 90%; } .reveal.active .skill-bar-fill.fill-verifier { width: 95%; } .reveal.active .skill-bar-fill.fill-maintenir { width: 50%; } .reveal.active .skill-bar-fill.fill-manager { width: 60%; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .doc-card { background: white; padding: 1.5rem; border-radius: 15px; border: 1px solid #e2e8f0; display: flex; flex-direction: column; align-items: center; text-align: center; transition: 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.05); } .doc-card:hover { border-color: var(--primary); box-shadow: 0 10px 20px rgba(0,0,0,0.1); transform: translateY(-5px); } .doc-icon { font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem; } .doc-actions { display: flex; gap: 0.5rem; margin-top: 1rem; width: 100%; }
+        .btn-doc { flex: 1; padding: 0.6rem; border-radius: 8px; font-size: 0.85rem; text-decoration: none; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 5px; transition: 0.2s; cursor: pointer; } .btn-preview { background: #eff6ff; color: var(--primary); } .btn-preview:hover { background: #dbeafe; } .btn-download { background: var(--primary); color: white; } .btn-download:hover { background: var(--primary-dark); }
+        .tech-stack-container { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 1rem; } .tech-badge { background: white; border: 1px solid #e2e8f0; padding: 0.5rem 1rem; border-radius: 10px; display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--text-dark); transition: all 0.3s; text-decoration: none; font-size: 0.9rem; } .tech-badge:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(99, 102, 241, 0.1); color: var(--primary); } .tech-badge i { color: var(--primary); font-size: 1.2rem; }
+        .lightbox { display: none; position: fixed; z-index: 2000; padding-top: 50px; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.9); backdrop-filter: blur(5px); } .lightbox-content { margin: auto; display: block; max-width: 90%; max-height: 85vh; border-radius: 5px; box-shadow: 0 0 50px rgba(255,255,255,0.1); animation: zoomIn 0.3s; } .close-lightbox { position: absolute; top: 20px; right: 35px; color: #f1f1f1; font-size: 40px; font-weight: bold; transition: 0.3s; cursor: pointer; }
+        @keyframes zoomIn { from {transform:scale(0)} to {transform:scale(1)} }
+        @media (max-width: 1200px) { .back-arrow { display: none; } } @media (max-width: 900px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <a href="projets.html" class="back-arrow" title="Retour aux projets"><i class="fa-solid fa-arrow-left"></i></a>
+    <div id="imgLightbox" class="lightbox" onclick="closeLightbox()"><span class="close-lightbox">&times;</span><img class="lightbox-content" id="lightboxImg"></div>
+    <div class="particles"></div>
+
+    <header>
+        <div class="header-content">
+            <div class="logo"><a href="index.html"><img src="Logo_ML_noir.png" alt="Logo"><img src="geii-logo.png" alt="Logo"></a></div>
+            <nav>
+                <a href="index.html">Accueil (Profil)</a>
+                <div class="dropdown">
+                    <a href="competences.html" class="dropbtn">Mes Compétences <i class="fa-solid fa-caret-down" style="font-size: 0.8em;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="concevoir.html">Concevoir</a>
+                        <a href="implanter.html">Implanter</a>
+                        <a href="verifier.html">Vérifier</a>
+                        <a href="maintenir.html">Maintenir</a>
+                        <a href="manager.html">Manager</a>
+                    </div>
+                </div>
+                <div class="dropdown"><a href="projets.html" class="dropbtn active">Mes Projets Techniques <i class="fa-solid fa-caret-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="projets_details_JRC.html">Jeu de rapidité (JRC)</a><a href="projets_details_LAB.html">Carte de contrôle RF (Stage)</a><a href="projets_details_CDR.html">Radiogoniométrie (CDR)</a><a href="projets_details_RMS.html" class="active">Robot mini-sumo (RMS)</a><a href="projets_details_KAH.html">Kart à hélice (KAH)</a>
+                    </div>
+                </div>
+                <a href="diplomes.html">Diplômes</a><a href="contact.html">Carrière</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-project reveal">
+            <div class="hero-content">
+                <h1 class="section-title">Robot Mini-Sumo (RMS)</h1>
+                <div class="card-full" style="max-width: 900px; margin: 0 auto 3rem auto; text-align: left; background: rgba(255, 255, 255, 0.95);">
+                    <h3 style="margin-bottom: 1.5rem; text-align: center; color: var(--primary);">Robotique autonome de compétition</h3>
+                    
+                    <p style="margin-bottom: 1rem; color: var(--text-gray); font-style: italic; text-align: center;">
+                        <i class="fa-solid fa-users"></i> Projet de groupe - Équipe 11
+                    </p>
+
+                    <p style="margin-bottom: 1.5rem; line-height: 1.6;">
+                        <strong>Mission :</strong> Développement d'un robot autonome de compétition (catégorie Mini-Sumo). Le défi : intégrer intelligence, capteurs et puissance dans un format ultra-compact (10x10cm) pour détecter et éjecter l'adversaire hors du dohyo.
+                    </p>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div>
+                            <div class="process-step"><div class="process-number">1</div><div><strong>Analyse (FAD) :</strong> Choix des capteurs (Sharp GP2Y, CNY70) et actionneurs.</div></div>
+                            <div class="process-step"><div class="process-number">2</div><div><strong>Conception (DDC) :</strong> Architecture électronique et logique d'asservissement.</div></div>
+                        </div>
+                        <div>
+                            <div class="process-step"><div class="process-number">3</div><div><strong>Réalisation (DDF) :</strong> Fabrication du shield et intégration mécanique.</div></div>
+                            <div class="process-step"><div class="process-number">4</div><div><strong>Validation (DDV) :</strong> Mesure de consommation et tests d'autonomie.</div></div>
+                        </div>
+                    </div>
+                </div>
+                <img src="RMS/rms_main.jpg" alt="Robot Mini-Sumo Final" class="project-main-image" style="max-width: 800px;" onclick="openLightbox(this)">
+                <p style="font-size: 0.9rem; color: var(--text-gray); margin-top: 0.5rem;"><i class="fa-solid fa-magnifying-glass-plus"></i> Robot finalisé prêt pour le combat</p>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2 class="section-title">1. Architecture et Choix des Capteurs</h2>
+            <div class="card-full">
+                <div class="grid grid-2">
+                    <div>
+                        <p style="line-height: 1.6;">
+                            Pour répondre aux exigences de réactivité et de détection, nous avons opté pour une architecture hybride basée sur une carte Arduino Uno.
+                            <br><br>
+                            <strong>Stratégie de détection (Choix via FAD) :</strong>
+                            <ul style="padding-left: 1.2rem; margin-top: 10px;">
+                                <li><strong>Adversaire :</strong> Capteurs infrarouges analogiques Sharp (GP2Y0A41SK0F pour l'avant, GP2Y0A021YK pour les côtés) pour leur portée adaptée au Dohyo.</li>
+                                <li><strong>Ligne Blanche (Sol) :</strong> Capteurs optiques réflectifs CNY70 pour détecter les bordures du terrain et éviter la sortie.</li>
+                                <li><strong>Démarrage :</strong> Récepteur IR (TSOP 18338) pour recevoir l'ordre de départ de la télécommande officielle.</li>
+                            </ul>
+                        </p>
+                    </div>
+                    <div style="text-align: center;">
+                        <img src="RMS/rms_synoptique_archi.jpg" alt="Synoptique Capteurs" class="project-main-image" style="max-width: 100%; border: 1px solid #e2e8f0;" onclick="openLightbox(this)">
+                        <p style="font-size: 0.9rem; color: var(--text-gray); margin-top: 0.5rem;">Architecture fonctionnelle du robot (DDC)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2 class="section-title">2. Réalisation du Shield de Puissance</h2>
+            <div class="card-full">
+                <div class="grid grid-2">
+                    <div>
+                        <p style="line-height: 1.6;">
+                            La commande des moteurs nécessitait une interface de puissance spécifique. Nous avons conçu un <strong>shield sur-mesure</strong> s'enfichant sur l'Arduino.
+                            <br><br>
+                            <strong>Points clés de la conception :</strong>
+                            <ul style="padding-left: 1.2rem;">
+                                <li>Intégration de deux ponts en H (DRV8833) pour le pilotage bidirectionnel des moteurs DC.</li>
+                                <li>Ajout de comparateurs LM339 pour numériser les signaux des capteurs de ligne (CNY70), libérant ainsi les entrées analogiques du microcontrôleur.</li>
+                                <li>Gestion de l'alimentation : Régulateur pour fournir du 5V stable à partir de la batterie LiPo 7.4V.</li>
+                            </ul>
+                        </p>
+                    </div>
+                    <div>
+                        <img src="RMS/rms_shield.jpg" alt="Shield RMS" class="project-main-image" style="max-width: 100%; border: 1px solid #e2e8f0;" onclick="openLightbox(this)">
+                        <p style="font-size: 0.9rem; color: var(--text-gray); margin-top: 0.5rem; text-align: center;">Shield monté sur le robot sumo (vue du câblage complet)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2 class="section-title">3. Validation énergétique & Fonctionnelle</h2>
+            <div class="card-full">
+                <div class="grid grid-2">
+                    <div>
+                        <p style="line-height: 1.6;">
+                            <strong>Essais énergétiques (DDV) :</strong> J'ai réalisé les mesures de consommation pour valider le dimensionnement de la batterie (LiPo 2S 800mAh).
+                            <ul style="padding-left: 1.2rem;">
+                                <li>Consommation moyenne mesurée : <strong>385 mA</strong> en fonctionnement.</li>
+                                <li>Autonomie calculée et vérifiée : <strong>1.66 h</strong> (supérieure à l'exigence de 1h30).</li>
+                            </ul>
+                            <br>
+                            <strong>Mise au point :</strong> Lors des tests, nous avons dû recalibrer les seuils de détection des capteurs Sharp car leur réponse variait selon la luminosité ambiante.
+                        </p>
+                    </div>
+                    <div>
+                        <img src="RMS/rms_schema.jpg" alt="Mesure courant" class="project-main-image" style="max-width: 100%; border: 1px solid #e2e8f0;" onclick="openLightbox(this)">
+                        <p style="font-size: 0.9rem; color: var(--text-gray); margin-top: 0.5rem;">Schéma de mesure de la consommation globale (DDV)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2 class="section-title">Environnement technique</h2>
+            <div class="card-full" style="text-align: center;">
+                <p style="margin-bottom: 2rem; color: var(--text-gray);">Outils utilisés :</p>
+                <div class="tech-stack-container">
+                    <a href="https://www.arduino.cc/" target="_blank" class="tech-badge">
+                        <i class="fa-solid fa-microchip"></i> Arduino IDE
+                    </a>
+                    <a href="https://www.labcenter.com/" target="_blank" class="tech-badge">
+                        <i class="fa-solid fa-bolt"></i> Proteus (Simu)
+                    </a>
+                    <a href="https://www.kicad.org/" target="_blank" class="tech-badge">
+                        <i class="fa-solid fa-pen-ruler"></i> KiCad (PCB)
+                    </a>
+                    <a href="#" class="tech-badge">
+                        <i class="fa-solid fa-file-excel"></i> Excel (FAD)
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2 class="section-title">Mobilisation des compétences</h2>
+            <div class="card-full">
+                <div class="grid grid-2" style="align-items: center;">
+                    <div><p>Projet complet alliant électronique analogique (capteurs), numérique (Arduino) et puissance (moteurs).</p></div>
+                    <div class="skills-bars">
+                        <div class="skill-item"><div class="skill-info"><span>Concevoir (Choix techno)</span><span>85%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill fill-concevoir"></div></div></div>
+                        <div class="skill-item"><div class="skill-info"><span>Implanter (Réalisation)</span><span>90%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill fill-implanter"></div></div></div>
+                        <div class="skill-item"><div class="skill-info"><span>Vérifier (Mesures)</span><span>95%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill fill-verifier"></div></div></div>
+                        <div class="skill-item"><div class="skill-info"><span>Maintenir (Calibrage)</span><span>50%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill fill-maintenir"></div></div></div>
+                        <div class="skill-item"><div class="skill-info"><span>Gérer (Travail d'équipe)</span><span>60%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill fill-manager"></div></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="project-documents reveal">
+            <h2 class="section-title">Livrables et documentation</h2>
+            <div class="grid grid-4">
+                <div class="doc-card">
+                    <div class="doc-content">
+                        <i class="fa-solid fa-file-contract doc-icon"></i>
+                        <h4>Cahier des charges (CDC)</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-gray); margin-bottom: 10px;">Règlement du tournoi.</p>
+                    </div>
+                    <div class="doc-actions">
+                        <a href="RMS/RMS_CDC.pdf" target="_blank" class="btn-doc btn-preview">Aperçu</a>
+                        <a href="RMS/RMS_CDC.pdf" download class="btn-doc btn-download">DL</a>
+                    </div>
+                </div>
+
+                <div class="doc-card">
+                    <div class="doc-content">
+                        <i class="fa-solid fa-pen-ruler doc-icon"></i>
+                        <h4>Dossier de Conception (DDC)</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-gray); margin-bottom: 10px;">Architecture et choix.</p>
+                    </div>
+                    <div class="doc-actions">
+                        <a href="RMS/RMS_DDC.pdf" target="_blank" class="btn-doc btn-preview">Aperçu</a>
+                        <a href="RMS/RMS_DDC.pdf" download class="btn-doc btn-download">DL</a>
+                    </div>
+                </div>
+
+                <div class="doc-card">
+                    <div class="doc-content">
+                        <i class="fa-solid fa-microchip doc-icon"></i>
+                        <h4>Dossier de Fabrication (DDF)</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-gray); margin-bottom: 10px;">Plans et méthodes.</p>
+                    </div>
+                    <div class="doc-actions">
+                        <a href="RMS/RMS_DDF.pdf" target="_blank" class="btn-doc btn-preview">Aperçu</a>
+                        <a href="RMS/RMS_DDF.pdf" download class="btn-doc btn-download">DL</a>
+                    </div>
+                </div>
+
+                <div class="doc-card">
+                    <div class="doc-content">
+                        <i class="fa-solid fa-clipboard-check doc-icon"></i>
+                        <h4>Dossier de Vérification (DDV)</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-gray); margin-bottom: 10px;">Résultats des essais.</p>
+                    </div>
+                    <div class="doc-actions">
+                        <a href="RMS/RMS_DDV.pdf" target="_blank" class="btn-doc btn-preview">Aperçu</a>
+                        <a href="RMS/RMS_DDV.pdf" download class="btn-doc btn-download">DL</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section style="text-align: center; padding: 3rem 2rem;">
+            <a href="projets.html" class="btn btn-primary"><i class="fa-solid fa-arrow-left"></i> Retour aux projets</a>
+        </section>
+
+        <section class="pre-footer reveal">
+            <div class="pre-footer-content">
+                <div class="pf-col">
+                    <h3><i class="fa-solid fa-address-card"></i> Me contacter</h3>
+                    <div class="social-links-small">
+                        <a href="mailto:margotannie.lestage@gmail.com"><i class="fa-solid fa-envelope"></i> margotannie.lestage@gmail.com</a>
+                        <a href="https://www.linkedin.com/in/margot-lestage/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="https://github.com/marlestage" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+                <div class="pf-col">
+                    <h3><i class="fa-solid fa-compass"></i> Navigation</h3>
+                    <ul class="pf-nav">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="competences.html">Compétences</a></li>
+                        <li><a href="projets.html">Projets</a></li>
+                        <li><a href="diplomes.html">Diplômes</a></li>
+                        <li><a href="contact.html">Carrière</a></li>
+                    </ul>
+                </div>
+                <div class="pf-col">
+                    <h3><i class="fa-solid fa-file-pdf"></i> Mon CV</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-gray); margin-bottom: 1rem;">Téléchargez mon CV complet au format PDF.</p>
+                    <a href="CV_electronicienne.pdf" target="_blank" class="btn btn-primary btn-sm"><i class="fa-solid fa-download"></i> Télécharger CV</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer><p>© 2025 Margot LESTAGE - Réalisé pour mon parcours GEII ESE - IUT Bordeaux.</p></footer>
+    <script>
+        function openLightbox(img) { document.getElementById("imgLightbox").style.display = "flex"; document.getElementById("lightboxImg").src = img.src; }
+        function closeLightbox() { document.getElementById("imgLightbox").style.display = "none"; }
+        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); }); }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
+    </script>
+</body>
+</html>

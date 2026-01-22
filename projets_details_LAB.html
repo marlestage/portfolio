@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stage Laboratoire d'Astrophysique (ALMA) - Margot LESTAGE</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        /* --- STYLES D'ORIGINE --- */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .hero-project { width: 100%; background: var(--gradient-hero); padding-top: 8rem; padding-bottom: 4rem; }
+        .hero-content { max-width: 1200px; margin: 0 auto; padding: 0 2rem; text-align: center; }
+        section:not(.hero-project) { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; width: 100%; box-sizing: border-box; }
+        
+        .back-arrow { position: fixed; top: 100px; left: 40px; font-size: 1.5rem; color: var(--primary); background: var(--bg-secondary); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: all 0.3s ease; z-index: 900; border: 1px solid rgba(99, 102, 241, 0.2); }
+        .back-arrow:hover { background: var(--primary); color: white; transform: translateX(-5px); }
+
+        .card-full { background: var(--bg-secondary); border-radius: 25px; padding: 2.5rem; box-shadow: 0 10px 40px rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.12); margin-bottom: 2rem; }
+        
+        .process-step { margin-bottom: 1rem; display: flex; align-items: flex-start; gap: 1rem; text-align: left; }
+        .process-number { background: var(--primary); color: white; width: 25px; height: 25px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; font-size: 0.85rem; margin-top: 2px; }
+        
+        .project-main-image { max-width: 100%; border-radius: 15px; box-shadow: 0 20px 60px rgba(99, 102, 241, 0.25); margin: 1rem auto; display: block; cursor: zoom-in; transition: transform 0.3s ease; border: 1px solid rgba(0,0,0,0.05); }
+        .project-main-image:hover { transform: scale(1.01); }
+        
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        
+        /* Titres avec marge de 50px et sans majuscules forcées */
+        .section-title { 
+            color: var(--primary); 
+            font-weight: 800; 
+            margin-bottom: 50px; 
+            text-transform: none; 
+        }
+
+        /* --- TABLEAU COMMANDES --- */
+        .cmd-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; font-size: 0.9rem; }
+        .cmd-table th { background: var(--primary); color: white; padding: 12px; text-align: left; border-radius: 5px 5px 0 0; }
+        .cmd-table td { padding: 12px; border-bottom: 1px solid #e2e8f0; color: var(--text-dark); }
+        .cmd-table tr:last-child td { border-bottom: none; }
+        .cmd-table tr:hover { background-color: #f8fafc; }
+        .code-tag { font-family: monospace; background: #e2e8f0; padding: 2px 6px; border-radius: 4px; color: #d63384; font-weight: bold; }
+
+        /* --- STYLES COMPÉTENCES ANIMÉES --- */
+        .skills-bars { display: flex; flex-direction: column; gap: 1.5rem; }
+        .skill-item { width: 100%; }
+        .skill-info { display: flex; justify-content: space-between; margin-bottom: 5px; font-weight: 600; color: var(--text-dark); }
+        .skill-bar-bg { width: 100%; height: 10px; background: #e2e8f0; border-radius: 5px; overflow: hidden; }
+        .skill-bar-fill { height: 100%; background: var(--primary); width: 0; border-radius: 5px; transition: width 1.5s ease-out; }
+        
+        .reveal.active .skill-bar-fill.fill-concevoir { width: 95%; }
+        .reveal.active .skill-bar-fill.fill-implanter { width: 90%; }
+        .reveal.active .skill-bar-fill.fill-verifier { width: 85%; }
+        .reveal.active .skill-bar-fill.fill-maintenir { width: 60%; }
+        .reveal.active .skill-bar-fill.fill-manager { width: 65%; }
+
+        /* --- STYLES LOGICIELS ET DOCUMENTS --- */
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .doc-card { background: white; padding: 1.5rem; border-radius: 15px; border: 1px solid #e2e8f0; display: flex; flex-direction: column; align-items: center; text-align: center; transition: 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .doc-card:hover { border-color: var(--primary); box-shadow: 0 10px 20px rgba(0,0,0,0.1); transform: translateY(-5px); }
+        .doc-icon { font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem; }
+        .doc-actions { display: flex; gap: 0.5rem; margin-top: 1rem; width: 100%; }
+        .btn-doc { flex: 1; padding: 0.6rem; border-radius: 8px; font-size: 0.85rem; text-decoration: none; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 5px; transition: 0.2s; cursor: pointer; }
+        .btn-preview { background: #eff6ff; color: var(--primary); }
+        .btn-preview:hover { background: #dbeafe; }
+        .btn-download { background: var(--primary); color: white; }
+        .btn-download:hover { background: var(--primary-dark); }
+        .tech-stack-container { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 1rem; }
+        .tech-badge { background: white; border: 1px solid #e2e8f0; padding: 0.5rem 1rem; border-radius: 10px; display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--text-dark); transition: all 0.3s; text-decoration: none; font-size: 0.9rem; }
+        .tech-badge:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(99, 102, 241, 0.1); color: var(--primary); }
+        .tech-badge i { color: var(--primary); font-size: 1.2rem; }
+
+        /* LIGHTBOX */
+        .lightbox { display: none; position: fixed; z-index: 2000; padding-top: 50px; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.9); backdrop-filter: blur(5px); }
+        .lightbox-content { margin: auto; display: block; max-width: 90%; max-height: 85vh; border-radius: 5px; box-shadow: 0 0 50px rgba(255,255,255,0.1); animation: zoomIn 0.3s; }
+        .close-lightbox { position: absolute; top: 20px; right: 35px; color: #f1f1f1; font-size: 40px; font-weight: bold; transition: 0.3s; cursor: pointer; }
+        @keyframes zoomIn { from {transform:scale(0)} to {transform:scale(1)} }
+
+        @media (max-width: 1200px) { .back-arrow { display: none; } }
+        @media (max-width: 900px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <a href="projets.html" class="back-arrow" title="Retour aux projets"><i class="fa-solid fa-arrow-left"></i></a>
+
+    <div id="imgLightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="close-lightbox">&times;</span>
+        <img class="lightbox-content" id="lightboxImg">
+    </div>
+
+    <div class="particles"></div>
+    
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="Logo_ML_noir.png" alt="Logo GEII" style="height: 50px;">
+                    <img src="geii-logo.png" alt="Logo GEII" style="height: 50px;">
+                </a>
+            </div>
+            <nav>
+                <a href="index.html">Accueil (Profil)</a>
+                <div class="dropdown">
+                    <a href="competences.html" class="dropbtn">Mes Compétences <i class="fa-solid fa-caret-down" style="font-size: 0.8em;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="concevoir.html">Concevoir</a>
+                        <a href="implanter.html">Implanter</a>
+                        <a href="verifier.html">Vérifier</a>
+                        <a href="maintenir.html">Maintenir</a>
+                        <a href="manager.html">Manager</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="projets.html" class="dropbtn active">Mes Projets Techniques <i class="fa-solid fa-caret-down" style="font-size: 0.8em;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="projets_details_JRC.html">Jeu de rapidité (JRC)</a>
+                        <a href="projets_details_LAB.html" class="active">Carte de contrôle RF (Stage)</a>
+                        <a href="projets_details_CDR.html">Radiogoniométrie (CDR)</a>
+                        <a href="projets_details_RMS.html">Robot mini-sumo (RMS)</a>
+                        <a href="projets_details_KAH.html">Kart à hélice (KAH)</a>
+                    </div>
+                </div>
+                <a href="diplomes.html">Diplômes</a>
+                <a href="contact.html">Carrière</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        
+        <section class="hero-project reveal">
+            <div class="hero-content">
+                <h1 class="section-title">Carte de contrôle RF (Projet ALMA)</h1>
+                
+                <div class="card-full" style="max-width: 900px; margin: 0 auto 3rem auto; text-align: left; background: rgba(255, 255, 255, 0.95);">
+                    <h3 style="margin-bottom: 1.5rem; text-align: center; color: var(--primary);">Automatisation de tests pour l'astrophysique</h3>
+                    
+                    <p style="margin-bottom: 1rem; color: var(--text-gray); font-style: italic; text-align: center;">
+                        <i class="fa-solid fa-building"></i> Stage au Laboratoire d'Astrophysique de Bordeaux (LAB).
+                    </p>
+
+                    <p style="margin-bottom: 1.5rem; line-height: 1.6;">
+                        <strong>Mission :</strong> Développement d'un banc de test automatisé pour le Laboratoire d'Astrophysique de Bordeaux. L'objectif : concevoir une carte électronique pilotant un atténuateur RF de précision pour caractériser les futurs numériseurs du télescope ALMA.
+                    </p>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div>
+                            <div class="process-step"><div class="process-number">1</div><div><strong>Analyse & simulation :</strong> Validation de l'alimentation sur LTSpice.</div></div>
+                            <div class="process-step"><div class="process-number">2</div><div><strong>Conception hardware :</strong> Schéma et routage du shield sous KiCad.</div></div>
+                        </div>
+                        <div>
+                            <div class="process-step"><div class="process-number">3</div><div><strong>Développement :</strong> Code C++ (STM32/Arduino) et interface Python.</div></div>
+                            <div class="process-step"><div class="process-number">4</div><div><strong>Validation & maintenance :</strong> Mesures RF, réparation et documentation.</div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <img src="LAB/lab_main.jpg" alt="Carte LAB Finale" class="project-main-image" style="max-width: 800px;" onclick="openLightbox(this)">
+                <p style="font-size: 0.9rem; color: var(--text-gray); margin-top: 0.5rem;"><i class="fa-solid fa-magnifying-glass-plus"></i> Carte shield finale assemblée</p>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2 class="section-title">Contexte scientifique : ALMA2030</h2>
+            <div class="card-full">
+                <div class="grid grid-2" style="align-items: center;">
+                    <div>
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Qu'est-ce qu'ALMA ?</h3>
+                        <p style="line-height: 1.6; margin-bottom: 1.5rem; text-align: justify;">
+                            L'<strong>Atacama Large Millimeter/submillimeter Array (ALMA)</strong> est le radiotélescope le plus puissant du monde. Situé à 5000m d'altitude au Chili (plateau de Chajnantor), il utilise <strong>66 antennes</strong> qui fonctionnent ensemble par interférométrie pour observer l'univers froid (nuages de gaz, formation d'étoiles) dans les ondes millimétriques.
+                        </p>
+                        
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">L'enjeu du stage : ALMA 2030 (WSU)</h3>
+                        <p style="line-height: 1.6; text-align: justify;">
+                            Pour rester à la pointe, l'observatoire lance le programme <strong>Wideband Sensitivity Upgrade (WSU)</strong> afin de doubler la bande passante et la sensibilité des récepteurs. 
+                            <br><br>
+                            Le laboratoire (LAB) développe de nouveaux numériseurs (ADC). Pour les valider, il faut injecter un <strong>bruit blanc Gaussien</strong> dont la puissance est contrôlée avec une extrême précision. C'est là que ma carte intervient : elle pilote un atténuateur RF numérique pour calibrer ce signal de test.
+                        </p>
+                    </div>
+                    <div>
+                        <img src="LAB/alma_telescope.jpg" alt="Réseau d'antennes ALMA" class="project-main-image" onclick="openLightbox(this)">
+                        <img src="LAB/lab_chaine_rf.jpg" alt="Synoptique Chaine RF" class="project-main-image" style="margin-top: 1.5rem;" onclick="openLightbox(this)">
+                        <p style="text-align: center; font-size: 0.8rem; color: var(--text-gray); margin-top: 5px;">Synoptique de la chaîne de test RF.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2 class="section-title">1. Simulation critique & Apprentissage LTSpice</h2>
+            <div class="card-full">
+                <div class="grid grid-2">
+                    <div>
+                        <p style="line-height: 1.6; color: var(--text-dark);">
+                            Ce projet m'a permis d'acquérir une compétence technique majeure non vue en cours : l'utilisation avancée de <strong>LTSpice</strong> pour la validation temporelle.
+                            <br><br>
+                            <strong>Le problème :</strong> L'atténuateur RF (ADRF5720) est un composant coûteux et fragile. Sa documentation technique impose une contrainte stricte : la tension négative (VSS = -3.3V) doit être établie <strong>avant</strong> la tension positive (VDD = +3.3V) lors de l'allumage. Si cette séquence n'est pas respectée, le composant grille.
+                            <br><br>
+                            <strong>Ma solution :</strong> J'ai modélisé l'ensemble du circuit d'alimentation (pompe de charge + commutateurs) sur LTSpice. J'ai simulé le régime transitoire à l'allumage pour dimensionner précisément les constantes de temps (réseaux RC) pilotant les transistors MOSFET. Cela m'a permis de garantir que le VDD ne monte que 50ms après le VSS.
+                        </p>
+                    </div>
+                    <div style="text-align: center;">
+                        <img src="Competences/lab_simu.jpg" alt="Simulation LTSpice" class="project-main-image" style="max-width: 100%; border: 1px solid #e2e8f0;" onclick="openLightbox(this)">
+                        <p style="font-size: 0.9rem; color: var(--text-gray); margin-top: 0.5rem;">Simulation du séquençage d'alimentation VDD (LTSpice)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2 class="section-title">2. Conception matérielle</h2>
+            <div class="card-full">
+                <div class="grid grid-2">
+                    <div>
+                        <p style="line-height: 1.6; color: var(--text-dark);">
+                            Réalisation d'un <strong>shield 2 couches</strong> (Top/Bottom) compatible STM32 Nucleo et Arduino Uno. Tous les composants sont implantés sur la face Top uniquement pour faciliter la soudure manuelle.
+                            <br><br>
+                            <strong>Points clés de la conception :</strong>
+                            <ul style="padding-left: 1.2rem;">
+                                <li><strong>Nouveau logiciel :</strong> J'ai appris à utiliser <strong>Fusion 360</strong> en autonomie (différent de KiCad/Proteus vus à l'IUT) pour le routage et l'intégration mécanique.</li>
+                                <li><strong>Audits de vérification :</strong> J'ai organisé des revues de projet avec mes collègues pour valider le schéma et le routage avant fabrication, une étape cruciale en milieu industriel pour éviter les erreurs coûteuses.</li>
+                                <li><strong>Intégrité du signal :</strong> Plan de masse soigné pour limiter le bruit sur les lignes de commande numérique.</li>
+                            </ul>
+                        </p>
+                    </div>
+                    <div>
+                        <img src="LAB/lab_schema.jpg" alt="Schéma KiCad" class="project-main-image" style="max-width: 100%; border: 1px solid #e2e8f0;" onclick="openLightbox(this)">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2 class="section-title">3. Développement logiciel & architecture</h2>
+            <div class="card-full">
+                <div class="grid grid-2" style="margin-bottom: 2rem;">
+                    <div>
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Architecture firmware (C++)</h3>
+                        <p style="line-height: 1.6;">
+                            J'ai conçu un firmware robuste capable de fonctionner indifféremment sur <strong>STM32</strong> (CubeIDE) ou <strong>Arduino</strong>. Le code gère :
+                            <ul style="padding-left: 1.2rem;">
+                                <li>La réception des commandes série caractère par caractère.</li>
+                                <li>L'analyse syntaxique (parsing) pour extraire les valeurs numériques.</li>
+                                <li>La <strong>gestion des erreurs</strong> : renvoi de codes (ERR1 à ERR5) si la commande est inconnue ou la valeur hors plage (0-31.5 dB).</li>
+                                <li>Le pilotage des 6 bits parallèles via des opérations bit-à-bit (bitwise) pour une exécution rapide.</li>
+                            </ul>
+                        </p>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Interface de contrôle (Python)</h3>
+                        <p style="line-height: 1.6;">
+                            Pour faciliter l'usage par les chercheurs, j'ai développé un script Python utilisant la bibliothèque <strong>PySerial</strong>.
+                            <br>
+                            Il intègre un fichier de configuration <strong>Parameter.json</strong> permettant de modifier le port COM et les messages d'erreur sans toucher au code source. Une fonction "Série" permet d'automatiser des rampes de mesure.
+                        </p>
+                    </div>
+                </div>
+
+                <h4 style="margin-bottom: 1rem; color: var(--text-dark); border-bottom: 1px solid #eee; padding-bottom: 10px;">Dictionnaire de commandes implémenté</h4>
+                
+                <table class="cmd-table">
+                    <thead>
+                        <tr>
+                            <th>Commande</th>
+                            <th>Syntaxe</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="code-tag">att</span></td>
+                            <td><code>att</code></td>
+                            <td>Retourne la valeur actuelle de l'atténuation.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="code-tag">att (set)</span></td>
+                            <td><code>att &lt;valeur&gt;</code></td>
+                            <td>Définit l'atténuation (ex: <code>att 10.5</code>). Plage : 0 à 31.5 dB (pas de 0.5).</td>
+                        </tr>
+                        <tr>
+                            <td><span class="code-tag">power</span></td>
+                            <td><code>power</code></td>
+                            <td>Retourne l'état de l'alimentation (ON/OFF).</td>
+                        </tr>
+                        <tr>
+                            <td><span class="code-tag">power (set)</span></td>
+                            <td><code>power on</code> / <code>off</code></td>
+                            <td>Active ou désactive l'alimentation de l'étage RF.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="code-tag">serie</span></td>
+                            <td><code>serie</code></td>
+                            <td>Lance une séquence automatique de mesures paramétrable.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="code-tag">exit</span></td>
+                            <td><code>exit</code></td>
+                            <td>Arrête le script et éteint proprement la carte.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2 class="section-title">4. Fabrication, Validation & Bilan</h2>
+            <div class="card-full">
+                <div class="grid grid-2">
+                    <div>
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Assemblage et Fabrication</h3>
+                        <p style="line-height: 1.6; margin-bottom: 1rem;">
+                            J'ai réalisé l'assemblage de la carte en utilisant les équipements de l'IUT. Pour les composants CMS, j'ai utilisé une machine de placement manuel (Pick & Place) avant de passer la carte au four à refusion. J'ai ensuite finalisé la carte par le brasage manuel des composants traversants.
+                        </p>
+
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Vérification des performances</h3>
+                        <p style="line-height: 1.6; margin-bottom: 1rem;">
+                            La validation s'est effectuée à l'oscilloscope. J'ai constitué un <strong>dossier de vérification</strong> regroupant toutes les preuves : analyse des fronts montants/descendants, respect des timings critiques entre VDD et VSS (séquençage), et validation individuelle des bits d'atténuation.
+                        </p>
+                        
+                        <h3 style="color: var(--primary); margin-bottom: 1rem; margin-top: 1.5rem;">Apprentissage par l'erreur (Maintenance)</h3>
+                        <p style="line-height: 1.6;">
+                            La phase de mise au point a été très formatrice. J'ai été confrontée à deux problèmes concrets :
+                            <br><br>
+                            1. <strong>Défaut de fabrication/conception :</strong> Malgré les audits, une erreur de routage a court-circuité les plans de masse et de 5V (non vue au DRC). J'ai dû analyser le schéma, localiser le défaut au multimètre et intervenir physiquement en grattant le vernis pour isoler les pistes.
+                            <br>
+                            2. <strong>Réparation minutieuse :</strong> Lors du soudage manuel, une LED 0402 a été endommagée par surchauffe. J'ai dû effectuer une opération de maintenance corrective sous binoculaire pour la remplacer.
+                        </p>
+                    </div>
+                    <div>
+                        <img src="Competences/lab_routage.jpg" alt="Réparation sous binoculaire" class="project-main-image" style="max-width: 100%; border: 1px solid #e2e8f0;" onclick="openLightbox(this)">
+                        <p style="font-size: 0.9rem; color: var(--text-gray); margin-top: 0.5rem; margin-bottom: 1.5rem;">Assemblage mixte de la carte</p>
+                        
+                        <img src="LAB/lab_oscillo.jpg" alt="Vérification Oscilloscope" class="project-main-image" style="max-width: 100%; border: 1px solid #e2e8f0;" onclick="openLightbox(this)">
+                        <p style="font-size: 0.9rem; color: var(--text-gray); margin-top: 0.5rem; margin-bottom: 1.5rem;">Visualisation d'un bit d'atténuation et du Latch Enable</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2 class="section-title">Environnement technique</h2>
+            <div class="card-full" style="text-align: center;">
+                <p style="margin-bottom: 2rem; color: var(--text-gray);">
+                    Outils professionnels utilisés pour la réalisation de ce projet :
+                </p>
+                <div class="tech-stack-container">
+                    <a href="https://www.autodesk.com/products/fusion-360/overview" target="_blank" class="tech-badge">
+                        <i class="fa-solid fa-cubes"></i> Fusion 360 (CAD/Elec)
+                    </a>
+                    <a href="https://www.analog.com/en/design-center/design-tools-and-calculators/ltspice-simulator.html" target="_blank" class="tech-badge">
+                        <i class="fa-solid fa-bolt"></i> LTSpice (Simu)
+                    </a>
+                    <a href="https://wokwi.com/" target="_blank" class="tech-badge">
+                        <i class="fa-solid fa-code"></i> Wokwi (Simu code)
+                    </a>
+                    <a href="https://www.python.org/" target="_blank" class="tech-badge">
+                        <i class="fa-brands fa-python"></i> Python (IHM)
+                    </a>
+                    <a href="https://www.st.com/en/development-tools/stm32cubeide.html" target="_blank" class="tech-badge">
+                        <i class="fa-solid fa-microchip"></i> STM32 CubeIDE
+                    </a>
+                    <a href="https://www.arduino.cc/" target="_blank" class="tech-badge">
+                        <i class="fa-solid fa-infinity"></i> Arduino IDE
+                    </a>
+                    <a href="https://fr.beta-layout.com/" target="_blank" class="tech-badge">
+                        <i class="fa-solid fa-industry"></i> PCB Pool (Fab)
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2 class="section-title">Mobilisation des compétences</h2>
+            <div class="card-full">
+                <div class="grid grid-2" style="align-items: center;">
+                    <div>
+                        <p style="margin-bottom: 1.5rem; line-height: 1.6;">
+                            Ce stage a été l'occasion de mettre en pratique l'ensemble des compétences du BUT GEII dans un contexte professionnel exigeant. Le graphique ci-contre illustre la répartition de l'effort fourni sur les différents pôles d'activité.
+                        </p>
+                    </div>
+                    <div class="skills-bars">
+                        <div class="skill-item">
+                            <div class="skill-info"><span>Concevoir</span><span>95%</span></div>
+                            <div class="skill-bar-bg"><div class="skill-bar-fill fill-concevoir"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info"><span>Implanter</span><span>90%</span></div>
+                            <div class="skill-bar-bg"><div class="skill-bar-fill fill-implanter"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info"><span>Vérifier</span><span>85%</span></div>
+                            <div class="skill-bar-bg"><div class="skill-bar-fill fill-verifier"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info"><span>Maintenir (Mise au point)</span><span>60%</span></div>
+                            <div class="skill-bar-bg"><div class="skill-bar-fill fill-maintenir"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info"><span>Gérer (Manager)</span><span>65%</span></div>
+                            <div class="skill-bar-bg"><div class="skill-bar-fill fill-manager"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="project-documents reveal">
+            <h2 class="section-title">Livrables et passation</h2>
+            
+            <p style="margin-bottom: 2rem; color: var(--text-gray); text-align: center;">
+                Afin d'assurer la pérennité du projet au laboratoire, j'ai constitué un <strong>dossier de passation complet</strong> incluant les codes sources commentés, les fichiers de fabrication et les manuels utilisateurs ci-dessous.
+            </p>
+
+            <div class="grid grid-4">
+                
+                <div class="doc-card">
+                    <div class="doc-content">
+                        <i class="fa-solid fa-file-pdf doc-icon"></i>
+                        <h4>Rapport de stage</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-gray); margin-bottom: 10px;">Dossier complet technique et bilan.</p>
+                    </div>
+                    <div class="doc-actions">
+                        <a href="LAB/Rapport_stage_Margot_LESTAGE.pdf" target="_blank" class="btn-doc btn-preview"><i class="fa-solid fa-eye"></i> Aperçu</a>
+                        <a href="LAB/Rapport_stage_Margot_LESTAGE.pdf" download class="btn-doc btn-download"><i class="fa-solid fa-download"></i> DL</a>
+                    </div>
+                </div>
+
+                <div class="doc-card">
+                    <div class="doc-content">
+                        <i class="fa-solid fa-book-open doc-icon"></i>
+                        <h4>User manual (EN)</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-gray); margin-bottom: 10px;">Documentation technique en anglais.</p>
+                    </div>
+                    <div class="doc-actions">
+                        <a href="LAB/Documentation_Shield_ADRF5720_(eng).pdf" target="_blank" class="btn-doc btn-preview"><i class="fa-solid fa-eye"></i> Aperçu</a>
+                        <a href="LAB/Documentation_Shield_ADRF5720_(eng).pdf" download class="btn-doc btn-download"><i class="fa-solid fa-download"></i> DL</a>
+                    </div>
+                </div>
+
+                <div class="doc-card">
+                    <div class="doc-content">
+                        <i class="fa-solid fa-book-open doc-icon"></i>
+                        <h4>Manuel Utilisateur (FR)</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-gray); margin-bottom: 10px;">Documentation technique en français.</p>
+                    </div>
+                    <div class="doc-actions">
+                        <a href="LAB/Documentation_Shield_ADRF5720.pdf" target="_blank" class="btn-doc btn-preview"><i class="fa-solid fa-eye"></i> Aperçu</a>
+                        <a href="LAB/Documentation_Shield_ADRF5720.pdf" download class="btn-doc btn-download"><i class="fa-solid fa-download"></i> DL</a>
+                    </div>
+                </div>
+
+                <div class="doc-card">
+                    <div class="doc-content">
+                        <i class="fa-solid fa-diagram-project doc-icon"></i>
+                        <h4>Schématique</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-gray); margin-bottom: 10px;">Plan électronique détaillé (PDF).</p>
+                    </div>
+                    <div class="doc-actions">
+                        <a href="LAB/Schéma_électronique_ADRF5720.pdf" target="_blank" class="btn-doc btn-preview"><i class="fa-solid fa-eye"></i> Aperçu</a>
+                        <a href="LAB/Schéma_électronique_ADRF5720.pdf" download class="btn-doc btn-download"><i class="fa-solid fa-download"></i> DL</a>
+                    </div>
+                </div>
+
+                <div class="doc-card">
+                    <div class="doc-content">
+                        <i class="fa-solid fa-clipboard-check doc-icon"></i>
+                        <h4>Dossier de Vérification</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-gray); margin-bottom: 10px;">Résultats des tests unitaires et fonctionnels.</p>
+                    </div>
+                    <div class="doc-actions">
+                        <a href="LAB/ADRF5720_VERIF.pdf" target="_blank" class="btn-doc btn-preview"><i class="fa-solid fa-eye"></i> Aperçu</a>
+                        <a href="LAB/ADRF5720_VERIF.pdf" download class="btn-doc btn-download"><i class="fa-solid fa-download"></i> DL</a>
+                    </div>
+                </div>
+
+                <div class="doc-card">
+                    <div class="doc-content">
+                        <i class="fa-solid fa-code doc-icon"></i>
+                        <h4>Code Arduino (.ino)</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-gray); margin-bottom: 10px;">Firmware de la carte.</p>
+                    </div>
+                    <div class="doc-actions">
+                        <a href="LAB/Code_C_ADRF5720_V5 (1).ino" download class="btn-doc btn-download"><i class="fa-solid fa-download"></i> DL</a>
+                    </div>
+                </div>
+
+                <div class="doc-card">
+                    <div class="doc-content">
+                        <i class="fa-solid fa-microchip doc-icon"></i>
+                        <h4>Config STM32 (.ioc)</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-gray); margin-bottom: 10px;">Configuration CubeMX.</p>
+                    </div>
+                    <div class="doc-actions">
+                        <a href="LAB/ADRF5720_code_STM32 (1).ioc" download class="btn-doc btn-download"><i class="fa-solid fa-download"></i> DL</a>
+                    </div>
+                </div>
+
+                <div class="doc-card">
+                    <div class="doc-content">
+                        <i class="fa-brands fa-python doc-icon"></i>
+                        <h4>Script Python (.py)</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-gray); margin-bottom: 10px;">Interface de contrôle.</p>
+                    </div>
+                    <div class="doc-actions">
+                        <a href="LAB/Code_Python_ADRF5720_V5.py" download class="btn-doc btn-download"><i class="fa-solid fa-download"></i> DL</a>
+                    </div>
+                </div>
+
+                <div class="doc-card">
+                    <div class="doc-content">
+                        <i class="fa-solid fa-gear doc-icon"></i>
+                        <h4>Config JSON (.json)</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-gray); margin-bottom: 10px;">Paramètres de l'interface.</p>
+                    </div>
+                    <div class="doc-actions">
+                        <a href="LAB/Parameter(3).json" download class="btn-doc btn-download"><i class="fa-solid fa-download"></i> DL</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        
+        <section style="text-align: center; padding: 3rem 2rem;">
+            <a href="projets.html" class="btn btn-primary"><i class="fa-solid fa-arrow-left"></i> Retour à la liste des projets</a>
+        </section>
+
+        <section class="pre-footer reveal">
+            <div class="pre-footer-content">
+                <div class="pf-col">
+                    <h3><i class="fa-solid fa-address-card"></i> Me contacter</h3>
+                    <div class="social-links-small">
+                        <a href="mailto:margotannie.lestage@gmail.com"><i class="fa-solid fa-envelope"></i> margotannie.lestage@gmail.com</a>
+                        <a href="https://www.linkedin.com/in/margot-lestage/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="https://github.com/marlestage" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+                <div class="pf-col">
+                    <h3><i class="fa-solid fa-compass"></i> Navigation</h3>
+                    <ul class="pf-nav">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="competences.html">Compétences</a></li>
+                        <li><a href="projets.html">Projets</a></li>
+                        <li><a href="diplomes.html">Diplômes</a></li>
+                        <li><a href="contact.html">Carrière</a></li>
+                    </ul>
+                </div>
+                <div class="pf-col">
+                    <h3><i class="fa-solid fa-file-pdf"></i> Mon CV</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-gray); margin-bottom: 1rem;">Téléchargez mon CV complet au format PDF.</p>
+                    <a href="CV_electronicienne.pdf" target="_blank" class="btn btn-primary btn-sm"><i class="fa-solid fa-download"></i> Télécharger CV</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2025 Margot LESTAGE - Réalisé pour mon parcours GEII ESE - IUT Bordeaux.</p> 
+    </footer>
+
+    <script>
+        function openLightbox(img) {
+            var lightbox = document.getElementById("imgLightbox");
+            var lightboxImg = document.getElementById("lightboxImg");
+            lightbox.style.display = "flex";
+            lightboxImg.src = img.src;
+        }
+
+        function closeLightbox() {
+            document.getElementById("imgLightbox").style.display = "none";
+        }
+
+        const ratio = 0.1;
+        const options = { root: null, rootMargin: '0px', threshold: ratio };
+        const handleIntersect = function (entries, observer) {
+            entries.forEach(function (entry) {
+                if (entry.intersectionRatio > ratio) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        };
+        const observer = new IntersectionObserver(handleIntersect, options);
+        document.querySelectorAll('.reveal').forEach(function (r) { observer.observe(r); });
+    </script>
+</body>
+</html>

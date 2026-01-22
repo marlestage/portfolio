@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compétence : Concevoir - Margot LESTAGE</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        .back-arrow { position: fixed; top: 100px; left: 40px; font-size: 1.5rem; color: var(--primary); background: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: all 0.3s ease; z-index: 900; border: 1px solid rgba(99, 102, 241, 0.2); }
+        .back-arrow:hover { background: var(--primary); color: white; transform: translateX(-5px); }
+        @media (max-width: 1200px) { .back-arrow { display: none; } }
+
+        .hero-project { width: 100%; background: var(--gradient-hero, linear-gradient(135deg, #e0e7ff 0%, #f3e8ff 100%)); padding-top: 8rem; padding-bottom: 4rem; }
+        .hero-content { max-width: 1200px; margin: 0 auto; padding: 0 2rem; text-align: center; }
+        
+        /* --- NOUVEAU STYLE DEFINITION EMBELLIE --- */
+        .card-full { 
+            background: rgba(255, 255, 255, 0.95); 
+            border-radius: 25px; 
+            padding: 3rem; 
+            box-shadow: 0 15px 50px rgba(99, 102, 241, 0.15); 
+            border: 1px solid rgba(255, 255, 255, 0.8); 
+            text-align: center; 
+            margin-top: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .def-icon-main { font-size: 3rem; color: var(--primary); margin-bottom: 1.5rem; background: rgba(99,102,241,0.1); width: 80px; height: 80px; line-height: 80px; border-radius: 50%; display: inline-block; }
+        .def-text { font-size: 1.1rem; line-height: 1.8; color: var(--text-dark); margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto; }
+        
+        .def-steps { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(0,0,0,0.05); }
+        .def-step { display: flex; flex-direction: column; align-items: center; gap: 10px; max-width: 150px; }
+        .def-step i { font-size: 1.5rem; color: var(--primary-dark); }
+        .def-step span { font-size: 0.9rem; font-weight: 600; color: var(--text-gray); }
+
+        /* RESTE DU CSS */
+        section:not(.hero-project) { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; width: 100%; box-sizing: border-box; }
+        .sub-competence-title { font-size: 1.8rem; color: var(--primary-dark); margin-bottom: 1.5rem; margin-top: 4rem; }
+        .proof-card { display: flex; gap: 2rem; background: white; border-radius: 20px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 5px 20px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.05); align-items: flex-start; transition: transform 0.3s; }
+        .proof-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .proof-content { flex: 1; }
+        .proof-image-container { flex: 0 0 350px; height: 250px; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); background: #f1f5f9; }
+        .proof-image { width: 100%; height: 100%; object-fit: cover; }
+        .tag { display: inline-block; background: rgba(99, 102, 241, 0.1); color: var(--primary); padding: 4px 12px; border-radius: 50px; font-size: 0.8rem; font-weight: 700; margin-bottom: 0.5rem; margin-right: 0.5rem; }
+        .proof-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 1rem; color: var(--primary); font-weight: 700; text-decoration: none; }
+        .proof-link:hover { text-decoration: underline; }
+        @media (max-width: 900px) { .proof-card { flex-direction: column; } .proof-image-container { width: 100%; height: 200px; flex: none; } }
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <a href="competences.html" class="back-arrow" title="Retour aux compétences"><i class="fa-solid fa-arrow-left"></i></a>
+
+    <div id="imgLightbox" class="lightbox" onclick="closeLightbox()"><span class="close-lightbox">&times;</span><img class="lightbox-content" id="lightboxImg"></div>
+
+    <div class="particles"></div>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="Logo_ML_noir.png" alt="Logo GEII" style="height: 50px;">
+                    <img src="geii-logo.png" alt="Logo GEII" style="height: 50px;">
+                </a>
+            </div>
+            <nav>
+                <a href="index.html">Accueil (Profil)</a>
+                <div class="dropdown">
+                    <a href="competences.html" class="dropbtn active">Mes Compétences <i class="fa-solid fa-caret-down" style="font-size: 0.8em;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="concevoir.html">Concevoir</a>
+                        <a href="implanter.html" class="active">Implanter</a>
+                        <a href="verifier.html">Vérifier</a>
+                        <a href="maintenir.html">Maintenir</a>
+                        <a href="manager.html">Manager</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="projets.html" class="dropbtn">Mes Projets Techniques <i class="fa-solid fa-caret-down" style="font-size: 0.8em;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="projets_details_JRC.html">Jeu de rapidité (JRC)</a>
+                        <a href="projets_details_LAB.html">Carte de contrôle RF (Stage)</a>
+                        <a href="projets_details_CDR.html">Radiogoniométrie (CDR)</a>
+                        <a href="projets_details_RMS.html">Robot mini-sumo (RMS)</a>
+                        <a href="projets_details_KAH.html">Kart à hélice (KAH)</a>
+                    </div>
+                </div>
+                <a href="diplomes.html">Diplômes</a>
+                <a href="contact.html">Carrière</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-project reveal">
+            <div class="hero-content">
+                <h1 class="section-title" style="margin-bottom: 50px;">Compétence : IMPLANTER (ESE)</h1>
+                <div class="card-full">
+                    <div class="def-icon-main"><i class="fa-solid fa-microchip"></i></div>
+                    <p class="def-text">
+                        <strong>Du concept à la réalité.</strong><br>
+                        Cette phase cruciale matérialise la conception à travers la fabrication matérielle (routage, assemblage) 
+                        et le développement logiciel (programmation embarquée), donnant vie au système.
+                    </p>
+
+                    <div class="personal-insight">
+                        <strong>Ce que j'en retiens :</strong> "J'ai compris que la qualité de l'implantation (un routage propre, un code bien commenté) est ce qui différencie un prototype instable d'un produit fini fiable."
+                        <br><br>
+                        <em>Note : Bien que j'illustre ici chaque point par un exemple précis, ces compétences sont transversales et ont été mobilisées dans la plupart de mes projets.</em>
+                    </div>
+
+                    <div class="def-steps">
+                        <a href="#fabrication" class="def-step" style="text-decoration: none; color: inherit;"><i class="fa-solid fa-hammer"></i><span>Fabrication</span></a>
+                        <a href="#fabrication" class="def-step" style="text-decoration: none; color: inherit;"><i class="fa-solid fa-code"></i><span>Codage</span></a>
+                        <a href="#conformite" class="def-step" style="text-decoration: none; color: inherit;"><i class="fa-solid fa-check-double"></i><span>Conformité</span></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal">
+            
+            <h2 id="fabrication" class="sub-competence-title">J'exécute la fabrication, l'installation, la mise en service d'un système</h2>
+            
+            <p style="max-width: 850px; color: var(--text-gray); margin-bottom: 2rem;">
+                Cette compétence couvre la réalisation concrète du système. Elle implique la maîtrise des techniques de brasage, le routage de cartes électroniques respectant les contraintes CEM, ainsi que l'intégration mécanique et le câblage des sous-ensembles pour aboutir à un prototype fonctionnel.
+            </p>
+            
+            <div class="proof-card">
+                <div class="proof-content">
+                    <span class="tag">Projet RMS</span>
+                    <h3>Fabrication Matérielle (Refusion)</h3>
+                    <p style="margin-top: 10px; color: var(--text-gray);">
+                        Application de la procédure de fabrication : placement des composants et soudure par refusion pour obtenir une carte fonctionnelle.
+                    </p>
+                    <a href="projets_details_RMS.html" class="proof-link">Voir le projet RMS <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <div class="proof-image-container"><img src="Competences/rms_fabrication.jpg" alt="RMS Fabrication" class="proof-image"></div>
+            </div>
+
+            <div class="proof-card">
+                <div class="proof-image-container"><img src="Competences/lab_routage.jpg" alt="Stage Routage" class="proof-image"></div>
+                <div class="proof-content">
+                    <span class="tag">Stage LAB</span>
+                    <h3>Routage de Carte Mixte</h3>
+                    <p style="margin-top: 10px; color: var(--text-gray);">
+                        Réalisation du routage sous KiCad en respectant les contraintes CEM (séparation des masses) pour la carte de contrôle RF.
+                    </p>
+                    <a href="projets_details_LAB.html" class="proof-link">Voir le projet Stage <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="proof-card">
+                <div class="proof-image-container"><img src="Competences/jrc_code.jpg" alt="JRC Code" class="proof-image"></div>
+                <div class="proof-content">
+                    <span class="tag">Projet JRC</span>
+                    <h3>Implantation Logicielle C++</h3>
+                    <p style="margin-top: 10px; color: var(--text-gray);">
+                        Développement et téléversement du code C++ (Interruptions, Machine à états) sur le microcontrôleur pour la mise en service.
+                    </p>
+                    <a href="projets_details_JRC.html" class="proof-link">Voir le projet JRC <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="proof-card">
+                <div class="proof-content">
+                    <span class="tag">Projet KAH</span>
+                    <h3>Protocole Infrarouge NEC</h3>
+                    <p style="margin-top: 10px; color: var(--text-gray);">
+                        Codage de la librairie de réception infrarouge (Timers) pour décoder les trames de la télécommande.
+                    </p>
+                    <a href="projets_details_KAH.html" class="proof-link">Voir le projet KAH <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <div class="proof-image-container"><img src="Competences/kah_code.jpg" alt="KAH Code" class="proof-image"></div>
+            </div>
+
+            <h2 id="conformite" class="sub-competence-title">Je prouve la conformité du système</h2>
+            <p style="max-width: 850px; color: var(--text-gray); margin-bottom: 2rem;">
+                Une fois le système réalisé, il est impératif de s'assurer qu'il respecte les normes et le cahier des charges. Je procède à des vérifications dimensionnelles, électriques et fonctionnelles pour garantir que le produit fini correspond exactement aux attentes définies.
+            </p>
+            <div class="proof-card">
+                <div class="proof-content">
+                    <span class="tag">Projet RMS</span>
+                    <h3>Évaluation de Conformité</h3>
+                    <p style="margin-top: 10px; color: var(--text-gray);">
+                        Vérification finale du robot (Poids, Dimensions) avant compétition pour valider sa conformité au règlement.
+                    </p>
+                    <a href="projets_details_RMS.html" class="proof-link">Voir le projet RMS <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <div class="proof-image-container"><img src="Competences/rms_conformite.jpg" alt="RMS Conformité" class="proof-image"></div>
+            </div>
+
+        </section>
+
+        <section style="text-align: center; padding: 3rem 2rem;">
+            <a href="competences.html" class="btn btn-primary"><i class="fa-solid fa-arrow-left"></i> Retour aux compétences</a>
+        </section>
+
+        <section class="pre-footer reveal">
+            <div class="pre-footer-content">
+                <div class="pf-col">
+                    <h3><i class="fa-solid fa-address-card"></i> Me contacter</h3>
+                    <div class="social-links-small">
+                        <a href="mailto:margotannie.lestage@gmail.com"><i class="fa-solid fa-envelope"></i> margotannie.lestage@gmail.com</a>
+                        <a href="https://www.linkedin.com/in/margot-lestage/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="https://github.com/marlestage" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+                <div class="pf-col">
+                    <h3><i class="fa-solid fa-compass"></i> Navigation</h3>
+                    <ul class="pf-nav">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="competences.html">Compétences</a></li>
+                        <li><a href="projets.html">Projets</a></li>
+                        <li><a href="diplomes.html">Diplômes</a></li>
+                        <li><a href="contact.html">Carrière</a></li>
+                    </ul>
+                </div>
+                <div class="pf-col">
+                    <h3><i class="fa-solid fa-file-pdf"></i> Mon CV</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-gray); margin-bottom: 1rem;">Téléchargez mon CV complet au format PDF.</p>
+                    <a href="CV_electronicienne.pdf" target="_blank" class="btn btn-primary btn-sm"><i class="fa-solid fa-download"></i> Télécharger CV</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer><p>© 2025 Margot LESTAGE - Réalisé pour mon parcours GEII ESE - IUT Bordeaux.</p></footer>
+    <script>
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(r => scrollObserver.observe(r));
+
+        // Lightbox Script
+        const lightbox = document.getElementById('imgLightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        function closeLightbox() { lightbox.style.display = "none"; }
+        document.querySelectorAll('main img').forEach(img => {
+            img.style.cursor = 'zoom-in';
+            img.addEventListener('click', function() {
+                lightbox.style.display = "flex";
+                lightboxImg.src = this.src;
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Margot LESTAGE - Diplômes & Relevés de Notes</title>
+    <meta name="description" content="Parcours académique, diplômes (BUT GEII, DU TSS) et relevés de notes de Margot Lestage.">
+    <!-- La feuille de style principale est conservée, mais les styles ci-dessous la surchargeront -->
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="pages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="particles"></div>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="Logo_ML_noir.png" alt="Logo GEII" style="height: 50px;">
+                    <img src="geii-logo.png" alt="Logo GEII" style="height: 50px;">
+                </a>
+            </div> 
+            <nav>
+                <a href="index.html">Accueil (Profil)</a>
+                <div class="dropdown">
+                    <a href="competences.html" class="dropbtn">Mes Compétences <i class="fa-solid fa-caret-down" style="font-size: 0.8em;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="concevoir.html">Concevoir</a>
+                        <a href="implanter.html">Implanter</a>
+                        <a href="verifier.html">Vérifier</a>
+                        <a href="maintenir.html">Maintenir</a>
+                        <a href="manager.html">Manager</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="projets.html" class="dropbtn">Mes Projets Techniques <i class="fa-solid fa-caret-down" style="font-size: 0.8em;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="projets_details_JRC.html">Jeu de rapidité (JRC)</a>
+                        <a href="projets_details_LAB.html">Carte de contrôle RF (Stage)</a>
+                        <a href="projets_details_CDR.html">Radiogoniométrie (CDR)</a>
+                        <a href="projets_details_RMS.html">Robot mini-sumo (RMS)</a>
+                        <a href="projets_details_KAH.html">Kart à hélice (KAH)</a>
+                    </div>
+                </div>
+                <a href="diplomes.html" class="active">Diplômes</a>
+                <a href="contact.html">Carrière</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="diplomes-et-notes" class="reveal">
+            <h2 class="section-title" style="margin-bottom: 50px;" ><i class="fa-solid fa-graduation-cap"></i> Mon parcours académique</h2>
+            
+            <p class="section-subtitle">
+                Retrouvez ici le détail de mon cursus académique en <strong>Bachelor Universitaire de Technologie (BUT) GEII</strong>. Cette section met en lumière mes résultats, ma progression constante et les qualifications qui jalonnent mon parcours.
+            </p>
+            
+            <!-- NOUVEAU : Cartes des indicateurs clés -->
+            <div class="grid grid-4 reveal">
+                <div class="card metric-card ">
+                    <i class="fa-solid fa-award"></i>
+                    <h4>Mention Bien</h4>
+                    <p>au Baccalauréat</p>
+                </div>
+                <div class="card metric-card ">
+                    <i class="fa-solid fa-ranking-star"></i>
+                    <h4>2ème / 37</h4>
+                    <p>Classement au S4</p>
+                </div>
+                <div class="card metric-card ">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                    <h4>DU TSS Obtenu</h4>
+                    <p>Technologie & Santé</p>
+                </div>
+                <div class="card metric-card ">
+                    <i class="fa-solid fa-plane-up"></i>
+                    <h4>BIA Obtenu</h4>
+                    <p>Initiation Aéronautique</p>
+                </div>
+            </div>
+
+            <!-- NOUVEAU : Section avec graphique et photo -->
+            <div class="dashboard-grid reveal" style="margin-top: 3rem;">
+                <div class="card " style="grid-column: 1 / -1;">
+                    <h3><i class="fa-solid fa-chart-line"></i> Progression des résultats par semestre</h3>
+                    <p>Le graphique illustre ma progression constante. Survolez une barre pour voir le détail des notes et du classement.</p>
+                    <div class="chart-container reveal">
+                        <!-- Chaque barre est un lien qui pourrait mener à un détail du PDF -->
+                        <a href="Releves_Notes_Officiels.pdf#page=1" target="_blank" class="chart-bar-wrapper">
+                            <div class="chart-bar" style="height: 65%;">
+                                <span class="bar-label">13.7 / 20</span>
+                                <span class="bar-rank-tooltip">Rang: 10e / 103</span>
+                                <span class="semester-label">Semestre 1</span>
+                            </div>
+                        </a>
+                        <a href="Releves_Notes_Officiels.pdf#page=2" target="_blank" class="chart-bar-wrapper">
+                            <div class="chart-bar" style="height: 75%;">
+                                <span class="bar-label">15.5 / 20</span>
+                                <span class="bar-rank-tooltip">Rang: 7e / 94</span>
+                                <span class="semester-label">Semestre 2</span>
+                            </div>
+                        </a>
+                        <a href="Releves_Notes_Officiels.pdf#page=3" target="_blank" class="chart-bar-wrapper">
+                            <div class="chart-bar" style="height: 80%;">
+                                <span class="bar-label">15.1 / 20</span>
+                                <span class="bar-rank-tooltip">Rang: 5e / 36</span>
+                                <span class="semester-label">Semestre 3</span>
+                            </div>
+                        </a>
+                        <a href="Releves_Notes_Officiels.pdf#page=4" target="_blank" class="chart-bar-wrapper">
+                            <div class="chart-bar" style="height: 95%;">
+                                <span class="bar-label">16.5 / 20</span>
+                                <span class="bar-rank-tooltip">Rang: 2e / 37</span>
+                                <span class="semester-label">Semestre 4</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NOUVEAU : Timeline horizontale des diplômes -->
+            <h3 class="section-title no-line" style="font-size: clamp(1.8rem, 4vw, 2.5rem); margin-top: 4rem;"><i class="fa-solid fa-timeline"></i> Mon parcours en quelques dates</h3>
+            <div class="horizontal-timeline card reveal">
+                <div class="timeline-event">
+                    <span class="tooltip">Obtenu en 2021</span>
+                    <div class="timeline-event-icon"><i class="fa-solid fa-plane"></i></div>
+                    <div class="timeline-event-date">2021</div>
+                    <div class="timeline-event-title">Brevet d'Initiation Aéronautique</div>
+                </div>
+                <div class="timeline-connector"></div>
+                <div class="timeline-event">
+                    <span class="tooltip">Spécialités : SI, Mathématiques, Physique-Chimie</span>
+                    <div class="timeline-event-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                    <div class="timeline-event-date">2023</div>
+                    <div class="timeline-event-title">Baccalauréat (Mention Bien)</div>
+                </div>
+                <div class="timeline-connector"></div>
+                <div class="timeline-event">
+                    <span class="tooltip">Diplôme obtenu en parallèle du BUT</span>
+                    <div class="timeline-event-icon"><i class="fa-solid fa-book-medical"></i></div>
+                    <div class="timeline-event-date">2024</div>
+                    <div class="timeline-event-title">DU Technologie & Santé</div>
+                </div>
+                <div class="timeline-connector"></div>
+                <div class="timeline-event">
+                    <span class="tooltip">Parcours Électronique et Systèmes Embarqués (ESE)</span>
+                    <div class="timeline-event-icon"><i class="fa-solid fa-flag-checkered"></i></div>
+                    <div class="timeline-event-date">2026</div>
+                    <div class="timeline-event-title">Objectif: BUT GEII</div>
+                </div>
+            </div>
+
+            <p style="text-align: center;" class="reveal">
+                <a href="Releves_Notes_Officiels.pdf" target="_blank" class="btn btn-primary" style="margin: 4rem auto 0;"><i class="fa-solid fa-file-pdf"></i> Télécharger mes relevés de notes (PDF)</a>
+            </p>
+
+        </section>
+
+        <section class="pre-footer reveal">
+            <div class="pre-footer-content">
+                <div class="pf-col">
+                    <h3><i class="fa-solid fa-address-card"></i> Me contacter</h3>
+                    <div class="social-links-small">
+                        <a href="mailto:margotannie.lestage@gmail.com"><i class="fa-solid fa-envelope"></i> margotannie.lestage@gmail.com</a>
+                        <a href="https://www.linkedin.com/in/margot-lestage/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="https://github.com/marlestage" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+                <div class="pf-col">
+                    <h3><i class="fa-solid fa-compass"></i> Navigation</h3>
+                    <ul class="pf-nav">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="competences.html">Compétences</a></li>
+                        <li><a href="projets.html">Projets</a></li>
+                        <li><a href="diplomes.html">Diplômes</a></li>
+                        <li><a href="contact.html">Carrière</a></li>
+                    </ul>
+                </div>
+                <div class="pf-col">
+                    <h3><i class="fa-solid fa-file-pdf"></i> Mon CV</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-gray); margin-bottom: 1rem;">Téléchargez mon CV complet au format PDF.</p>
+                    <a href="CV_electronicienne.pdf" target="_blank" class="btn btn-primary btn-sm"><i class="fa-solid fa-download"></i> Télécharger CV</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Margot LESTAGE - Réalisé pour mon parcours GEII ESE - IUT Bordeaux.</p>
+    </footer>
+
+    <script>
+        // Script pour l'animation au défilement
+        const ratio = 0.1;
+        const options = {
+            root: null,
+            rootMargin: '0px',
+            threshold: ratio
+        };
+
+        const handleIntersect = function (entries, observer) {
+            entries.forEach(function (entry) {
+                if (entry.intersectionRatio > ratio) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(handleIntersect, options);
+        document.querySelectorAll('.reveal').forEach(function (r) {
+            observer.observe(r);
+        });
+    </script>
+
+</body>
+</html>

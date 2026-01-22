@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet RF : Antenne de Radiogoniométrie - Margot LESTAGE</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        /* --- STYLES HARMONISÉS (IDENTIQUES AU LAB) --- */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; } .reveal.active { opacity: 1; transform: translateY(0); }
+        .hero-project { width: 100%; background: var(--gradient-hero); padding-top: 8rem; padding-bottom: 4rem; }
+        .hero-content { max-width: 1200px; margin: 0 auto; padding: 0 2rem; text-align: center; }
+        section:not(.hero-project) { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; width: 100%; box-sizing: border-box; }
+        .back-arrow { position: fixed; top: 100px; left: 40px; font-size: 1.5rem; color: var(--primary); background: var(--bg-secondary); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: all 0.3s ease; z-index: 900; border: 1px solid rgba(99, 102, 241, 0.2); } .back-arrow:hover { background: var(--primary); color: white; transform: translateX(-5px); }
+        .card-full { background: var(--bg-secondary); border-radius: 25px; padding: 2.5rem; box-shadow: 0 10px 40px rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.12); margin-bottom: 2rem; }
+        .process-step { margin-bottom: 1rem; display: flex; align-items: flex-start; gap: 1rem; text-align: left; }
+        .process-number { background: var(--primary); color: white; width: 25px; height: 25px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; font-size: 0.85rem; margin-top: 2px; }
+        .project-main-image { max-width: 100%; border-radius: 15px; box-shadow: 0 20px 60px rgba(99, 102, 241, 0.25); margin: 1rem auto; display: block; cursor: zoom-in; transition: transform 0.3s ease; border: 1px solid rgba(0,0,0,0.05); } .project-main-image:hover { transform: scale(1.01); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .section-title { color: var(--primary); font-weight: 800; margin-bottom: 50px; text-transform: none; }
+        .skills-bars { display: flex; flex-direction: column; gap: 1.5rem; } .skill-item { width: 100%; } .skill-info { display: flex; justify-content: space-between; margin-bottom: 5px; font-weight: 600; color: var(--text-dark); } .skill-bar-bg { width: 100%; height: 10px; background: #e2e8f0; border-radius: 5px; overflow: hidden; } .skill-bar-fill { height: 100%; background: var(--primary); width: 0; border-radius: 5px; transition: width 1.5s ease-out; }
+        .reveal.active .skill-bar-fill.fill-concevoir { width: 90%; } .reveal.active .skill-bar-fill.fill-implanter { width: 75%; } .reveal.active .skill-bar-fill.fill-verifier { width: 95%; } .reveal.active .skill-bar-fill.fill-maintenir { width: 40%; } .reveal.active .skill-bar-fill.fill-manager { width: 50%; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .doc-card { background: white; padding: 1.5rem; border-radius: 15px; border: 1px solid #e2e8f0; display: flex; flex-direction: column; align-items: center; text-align: center; transition: 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.05); } .doc-card:hover { border-color: var(--primary); box-shadow: 0 10px 20px rgba(0,0,0,0.1); transform: translateY(-5px); } .doc-icon { font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem; } .doc-actions { display: flex; gap: 0.5rem; margin-top: 1rem; width: 100%; }
+        .btn-doc { flex: 1; padding: 0.6rem; border-radius: 8px; font-size: 0.85rem; text-decoration: none; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 5px; transition: 0.2s; cursor: pointer; } .btn-preview { background: #eff6ff; color: var(--primary); } .btn-preview:hover { background: #dbeafe; } .btn-download { background: var(--primary); color: white; } .btn-download:hover { background: var(--primary-dark); }
+        .tech-stack-container { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 1rem; } .tech-badge { background: white; border: 1px solid #e2e8f0; padding: 0.5rem 1rem; border-radius: 10px; display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--text-dark); transition: all 0.3s; text-decoration: none; font-size: 0.9rem; } .tech-badge:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(99, 102, 241, 0.1); color: var(--primary); } .tech-badge i { color: var(--primary); font-size: 1.2rem; }
+        .lightbox { display: none; position: fixed; z-index: 2000; padding-top: 50px; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.9); backdrop-filter: blur(5px); } .lightbox-content { margin: auto; display: block; max-width: 90%; max-height: 85vh; border-radius: 5px; box-shadow: 0 0 50px rgba(255,255,255,0.1); animation: zoomIn 0.3s; } .close-lightbox { position: absolute; top: 20px; right: 35px; color: #f1f1f1; font-size: 40px; font-weight: bold; transition: 0.3s; cursor: pointer; }
+        @keyframes zoomIn { from {transform:scale(0)} to {transform:scale(1)} }
+        @media (max-width: 1200px) { .back-arrow { display: none; } } @media (max-width: 900px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <a href="projets.html" class="back-arrow" title="Retour aux projets"><i class="fa-solid fa-arrow-left"></i></a>
+    <div id="imgLightbox" class="lightbox" onclick="closeLightbox()"><span class="close-lightbox">&times;</span><img class="lightbox-content" id="lightboxImg"></div>
+    <div class="particles"></div>
+
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="Logo_ML_noir.png" alt="Logo GEII" style="height: 50px;">
+                    <img src="geii-logo.png" alt="Logo GEII" style="height: 50px;">
+                </a>
+            </div>
+            <nav>
+                <a href="index.html">Accueil (Profil)</a>
+                <div class="dropdown">
+                    <a href="competences.html" class="dropbtn">Mes Compétences <i class="fa-solid fa-caret-down" style="font-size: 0.8em;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="concevoir.html">Concevoir</a>
+                        <a href="implanter.html">Implanter</a>
+                        <a href="verifier.html">Vérifier</a>
+                        <a href="maintenir.html">Maintenir</a>
+                        <a href="manager.html">Manager</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="projets.html" class="dropbtn active">Mes Projets Techniques <i class="fa-solid fa-caret-down" style="font-size: 0.8em;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="projets_details_JRC.html">Jeu de rapidité (JRC)</a>
+                        <a href="projets_details_LAB.html">Carte de contrôle RF (Stage)</a>
+                        <a href="projets_details_CDR.html" class="active">Radiogoniométrie (CDR)</a>
+                        <a href="projets_details_RMS.html">Robot mini-sumo (RMS)</a>
+                        <a href="projets_details_KAH.html">Kart à hélice (KAH)</a>
+                    </div>
+                </div>
+                <a href="diplomes.html">Diplômes</a>
+                <a href="contact.html">Carrière</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-project reveal">
+            <div class="hero-content">
+                <h1 class="section-title">Challenge De Radiogoniométrie (CDR)</h1>
+                <div class="card-full" style="max-width: 900px; margin: 0 auto 3rem auto; text-align: left; background: rgba(255, 255, 255, 0.95);">
+                    <h3 style="margin-bottom: 1.5rem; text-align: center; color: var(--primary);">Conception antennaire RF 144 MHz</h3>
+                    <p style="margin-bottom: 1.5rem; line-height: 1.6;">
+                        <strong>Mission :</strong> Étude, dimensionnement et fabrication d'une antenne directive optimisée pour la bande 144 MHz. Ce projet visait à localiser avec précision une balise radio mobile dans le cadre d'un challenge de radiogoniométrie.
+                    </p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div>
+                            <div class="process-step"><div class="process-number">1</div><div><strong>Analyse :</strong> Étude comparative des antennes (Yagi, HB9CV, Moxon).</div></div>
+                            <div class="process-step"><div class="process-number">2</div><div><strong>Conception :</strong> Dimensionnement théorique pour la bande 144 MHz.</div></div>
+                        </div>
+                        <div>
+                            <div class="process-step"><div class="process-number">3</div><div><strong>Réalisation :</strong> Fabrication mécanique et adaptation (Gamma match).</div></div>
+                            <div class="process-step"><div class="process-number">4</div><div><strong>Validation :</strong> Mesures au VNA et tests terrain.</div></div>
+                        </div>
+                    </div>
+                </div>
+                <img src="CDR/cdr_main.jpg" alt="Antenne HB9CV Finale" class="project-main-image" style="max-width: 800px;" onclick="openLightbox(this)">
+                <p style="font-size: 0.9rem; color: var(--text-gray); margin-top: 0.5rem;"><i class="fa-solid fa-magnifying-glass-plus"></i> Antenne HB9CV réalisée</p>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2 class="section-title">1. Analyse & Choix de la solution</h2>
+            <div class="card-full">
+                <div class="grid grid-2">
+                    <div>
+                        <p style="line-height: 1.6;">
+                            Pour répondre au besoin de directivité (trouver la direction de la balise) et de compacité (transportable à la main), j'ai mené une étude comparative.
+                            <br><br>
+                            <strong>Choix : Antenne HB9CV</strong>
+                            <br>Ce modèle à 2 éléments alimentés en phase offre un excellent rapport Gain/Encombrement et un rapport Avant/Arrière très marqué, idéal pour la radiogoniométrie.
+                        </p>
+                    </div>
+                    <div style="text-align: center;">
+                        <img src="CDR/cdr_hb9cv.jpg" alt="Schéma de principe HB9CV" class="project-main-image" style="max-width: 100%; border: 1px solid #e2e8f0;" onclick="openLightbox(this)">
+                        <p style="font-size: 0.9rem; color: var(--text-gray); margin-top: 0.5rem;">Schéma de principe HB9CV</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2 class="section-title">2. Réalisation & Adaptation</h2>
+            <div class="card-full">
+                <p style="line-height: 1.6;">
+                    La fabrication a nécessité une précision millimétrique sur la longueur des éléments pour résonner à 144 MHz.
+                    <br><br>
+                    <strong>Point critique : L'adaptation en fréquence</strong>
+                    <br>Pour ajuster la fréquence de résonance, nous avons procédé par ajustements successifs en coupant symétriquement les extrémités des éléments (réflecteur/directeur) pour centrer la réception sur 144 MHz.
+                </p>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2 class="section-title">3. Validation & Diagramme de rayonnement</h2>
+            <div class="card-full">
+                <div class="grid grid-2">
+                    <div>
+                        <p style="line-height: 1.6;">
+                            Nous avons utilisé un outil de simulation en ligne pour générer le diagramme de rayonnement théorique et vérifier la directivité de l'antenne.
+                            <br><br>
+                            <strong>Validation VNA :</strong>
+                            <br>Nous avons également validé l'adaptation d'impédance à l'aide d'un Analyseur de Réseau Vectoriel (VNA). Bien que je n'aie pas conservé les captures, les mesures ont confirmé un TOS satisfaisant à la fréquence cible.
+                        </p>
+                    </div>
+                    <div>
+                        <img src="CDR/cdr_rayonnement.jpg" alt="Diagramme de rayonnement" class="project-main-image" style="max-width: 100%; border: 1px solid #e2e8f0;" onclick="openLightbox(this)">
+                        <p style="font-size: 0.9rem; color: var(--text-gray); margin-top: 0.5rem;">Simulation du diagramme de rayonnement</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2 class="section-title">Environnement technique</h2>
+            <div class="card-full" style="text-align: center;">
+                <p style="margin-bottom: 2rem; color: var(--text-gray);">
+                    Outils utilisés pour l'étude et la validation RF :
+                </p>
+                <div class="tech-stack-container">
+                    <a href="#" class="tech-badge"><i class="fa-solid fa-satellite-dish"></i> MMANA-GAL (Simu Antenne)</a>
+                    <a href="#" class="tech-badge"><i class="fa-solid fa-wave-square"></i> VNA (Analyseur)</a>
+                    <a href="#" class="tech-badge"><i class="fa-solid fa-calculator"></i> Calculs d'impédance</a>
+                    <a href="#" class="tech-badge"><i class="fa-solid fa-wrench"></i> Mécanique de précision</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2 class="section-title">Mobilisation des compétences</h2>
+            <div class="card-full">
+                <div class="grid grid-2" style="align-items: center;">
+                    <div>
+                        <p style="margin-bottom: 1.5rem; line-height: 1.6;">
+                            Ce projet a fortement sollicité la compétence <strong>Vérifier</strong> (mesures RF) et <strong>Concevoir</strong> (dimensionnement physique).
+                        </p>
+                    </div>
+                    <div class="skills-bars">
+                        <div class="skill-item"><div class="skill-info"><span>Concevoir</span><span>90%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill fill-concevoir"></div></div></div>
+                        <div class="skill-item"><div class="skill-info"><span>Implanter (Réalisation)</span><span>75%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill fill-implanter"></div></div></div>
+                        <div class="skill-item"><div class="skill-info"><span>Vérifier (Mesures)</span><span>95%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill fill-verifier"></div></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="project-documents reveal">
+            <h2 class="section-title">Livrables du projet</h2>
+            <div class="grid grid-4">
+                <div class="doc-card">
+                    <div class="doc-content">
+                        <i class="fa-solid fa-file-contract doc-icon"></i>
+                        <h4>Cahier des charges (CDC)</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-gray); margin-bottom: 10px;">Besoins et contraintes.</p>
+                    </div>
+                    <div class="doc-actions">
+                        <a href="CDR/CDR-CDC v1-4.pdf" target="_blank" class="btn-doc btn-preview"><i class="fa-solid fa-eye"></i> Aperçu</a>
+                        <a href="CDR/CDR-CDC v1-4.pdf" download class="btn-doc btn-download"><i class="fa-solid fa-download"></i> DL</a>
+                    </div>
+                </div>
+                <div class="doc-card">
+                    <div class="doc-content">
+                        <i class="fa-solid fa-pen-ruler doc-icon"></i>
+                        <h4>Dossier de Conception (DDC)</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-gray); margin-bottom: 10px;">Calculs et plans.</p>
+                    </div>
+                    <div class="doc-actions">
+                        <a href="CDR/B1_DDC_EQ13_V1.pdf" target="_blank" class="btn-doc btn-preview"><i class="fa-solid fa-eye"></i> Aperçu</a>
+                        <a href="CDR/B1_DDC_EQ13_V1.pdf" download class="btn-doc btn-download"><i class="fa-solid fa-download"></i> DL</a>
+                    </div>
+                </div>
+                <div class="doc-card">
+                    <div class="doc-content">
+                        <i class="fa-solid fa-microchip doc-icon"></i>
+                        <h4>Dossier de Fabrication (DDF)</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-gray); margin-bottom: 10px;">Gamme de fabrication.</p>
+                    </div>
+                    <div class="doc-actions">
+                        <a href="CDR/CDR_DDF_V1.pdf" target="_blank" class="btn-doc btn-preview"><i class="fa-solid fa-eye"></i> Aperçu</a>
+                        <a href="CDR/CDR_DDF_V1.pdf" download class="btn-doc btn-download"><i class="fa-solid fa-download"></i> DL</a>
+                    </div>
+                </div>
+                <div class="doc-card">
+                    <div class="doc-content">
+                        <i class="fa-solid fa-clipboard-check doc-icon"></i>
+                        <h4>Dossier de Vérification (DDV)</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-gray); margin-bottom: 10px;">Résultats VNA.</p>
+                    </div>
+                    <div class="doc-actions">
+                        <a href="CDR/CDR_DDV_EQ13.pdf" target="_blank" class="btn-doc btn-preview"><i class="fa-solid fa-eye"></i> Aperçu</a>
+                        <a href="CDR/CDR_DDV8_EQ13.pdf" download class="btn-doc btn-download"><i class="fa-solid fa-download"></i> DL</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section style="text-align: center; padding: 3rem 2rem;">
+            <a href="projets.html" class="btn btn-primary"><i class="fa-solid fa-arrow-left"></i> Retour à la liste des projets</a>
+        </section>
+
+        <section class="pre-footer reveal">
+            <div class="pre-footer-content">
+                <div class="pf-col">
+                    <h3><i class="fa-solid fa-address-card"></i> Me contacter</h3>
+                    <div class="social-links-small">
+                        <a href="mailto:margotannie.lestage@gmail.com"><i class="fa-solid fa-envelope"></i> margotannie.lestage@gmail.com</a>
+                        <a href="https://www.linkedin.com/in/margot-lestage/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="https://github.com/marlestage" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+                <div class="pf-col">
+                    <h3><i class="fa-solid fa-compass"></i> Navigation</h3>
+                    <ul class="pf-nav">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="competences.html">Compétences</a></li>
+                        <li><a href="projets.html">Projets</a></li>
+                        <li><a href="diplomes.html">Diplômes</a></li>
+                        <li><a href="contact.html">Carrière</a></li>
+                    </ul>
+                </div>
+                <div class="pf-col">
+                    <h3><i class="fa-solid fa-file-pdf"></i> Mon CV</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-gray); margin-bottom: 1rem;">Téléchargez mon CV complet au format PDF.</p>
+                    <a href="CV_electronicienne.pdf" target="_blank" class="btn btn-primary btn-sm"><i class="fa-solid fa-download"></i> Télécharger CV</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer><p>© 2025 Margot LESTAGE - Réalisé pour mon parcours GEII ESE - IUT Bordeaux.</p></footer>
+    <script>
+        function openLightbox(img) { document.getElementById("imgLightbox").style.display = "flex"; document.getElementById("lightboxImg").src = img.src; }
+        function closeLightbox() { document.getElementById("imgLightbox").style.display = "none"; }
+        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); }); }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
+    </script>
+</body>
+</html>
