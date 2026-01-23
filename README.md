@@ -1,6 +1,6 @@
 # Portfolio Technique - Margot LESTAGE 🎓
 
-Bienvenue sur le dépôt source de mon portfolio numérique. Ce site a été réalisé pour présenter mes compétences et mes projets dans le cadre de mon **BUT Génie Électrique et Informatique Industrielle (GEII)** à l'IUT de Bordeaux.
+Bienvenue sur le dépôt source de mon portfolio numérique. Ce site a été réalisé pour présenter mes compétences et mes projets dans le cadre de mon **BUT Génie Électrique et Informatique Industrielle (GEII)** à l'IUT de Bordeaux.   
 
 ---
 
