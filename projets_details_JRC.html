@@ -75,7 +75,7 @@
                     </div>
 
                     <p style="margin-bottom: 1.5rem; line-height: 1.6;">
-                        <strong>Mission :</strong> Conception intégrale (Hardware & Software) d'un module de jeu connecté. En tant que <strong>responsable logicielle</strong>, j'ai assuré le développement d'un firmware temps réel performant et d'un protocole de communication robuste avec un PC superviseur.
+                        <strong>Mission :</strong> Conception intégrale (Hardware & Software) d'un module de jeu connecté type jeu de taupe. En tant que <strong>"responsable" logicielle</strong>, j'ai assuré le développement d'un firmware temps réel performant et d'un protocole de communication robuste avec un PC superviseur.
                         <br><br>
                         <em>Objectif final :</em> Interconnecter plusieurs manettes JRC via une interface Python pour organiser des tournois interactifs.
                     </p>
@@ -106,7 +106,7 @@
                             Le projet imposait des contraintes strictes de coût et de performance. J'ai réalisé des <strong>Fiches d'Aide à la Décision (FAD)</strong> pour justifier chaque choix :
                             <ul style="padding-left: 1.2rem; margin-top: 10px;">
                                 <li><strong>Microcontrôleur :</strong> Choix de l'ATmega328P (Arduino Nano) pour son coût réduit (2,29€) et sa facilité de programmation en C++, tout en offrant suffisamment de broches PWM pour les LEDs RGB.</li>
-                                <li><strong>Interface :</strong> Boutons poussoirs tactiles MCDTS6-5R pour leur réactivité et LEDs RGB ASMB-MTB0 pour l'affichage des états de jeu.</li>
+                                <li><strong>Interface :</strong> Boutons poussoirs MCDTS6-5R pour leur réactivité et la facilité d'appui. LEDs RGB ASMB-MTB0 pour l'affichage des états de jeu dans les différentes couleurs demandées.</li>
                                 <li><strong>Communication :</strong> Conversion USB-UART pour dialoguer avec le PC maître.</li>
                             </ul>
                         </p>
@@ -120,7 +120,7 @@
         </section>
 
         <section class="reveal">
-            <h2 class="section-title">2. Architecture logicielle (Ma mission principale)</h2>
+            <h2 class="section-title">2. Architecture logicielle </h2>
             <div class="card-full">
                 <div class="grid grid-2">
                     <div>
@@ -130,8 +130,8 @@
                             <br><br>
                             J'ai implémenté un protocole de communication robuste pour décoder les trames reçues :
                             <ul style="padding-left: 1.2rem;">
-                                <li><code>A</code> : Lance le jeu A (Réflexe simple).</li>
-                                <li><code>B</code> : Lance le jeu B (Variante).</li>
+                                <li><code>A</code> : Lance le jeu A (réflexe simple).</li>
+                                <li><code>B</code> : Lance le jeu B (variante à 20 appuis consécutifs).</li>
                                 <li><code>R</code> : Reset du module (remise à zéro).</li>
                                 <li><code>V</code> + param : Demande d'infos (0=ID, 1=Dernier temps, 2=Erreurs, 3=Valides, 4=Moyenne).</li>
                             </ul>
